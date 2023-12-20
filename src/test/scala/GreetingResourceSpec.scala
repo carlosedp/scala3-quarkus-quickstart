@@ -14,7 +14,7 @@ class GreetingResourceSpec:
         Given()
             .When(
                 _.get("/hello")
-            ).Then(r =>
-                r.statusCode(200)
-                r.body(is("Hello from RESTEasy Reactive in Scala 3"))
+            ).Then(res =>
+                res.statusCode(200)
+                res.body(is("Hello from RESTEasy Reactive in Scala 3"))
             )
