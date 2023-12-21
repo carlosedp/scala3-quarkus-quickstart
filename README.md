@@ -18,6 +18,7 @@ To start developing in Quarkus/Scala 3, I recommend the following:
   - [Metals](https://marketplace.visualstudio.com/items?itemName=scalameta.metals) by ScalaMeta
   - [Scala Syntax](https://marketplace.visualstudio.com/items?itemName=scala-lang.scala)
   - [Scaladex search](https://marketplace.visualstudio.com/items?itemName=baccata.scaladex-search)
+  - [Quarkus Tools](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-quarkus)
 
 ## Running the application in dev mode
 

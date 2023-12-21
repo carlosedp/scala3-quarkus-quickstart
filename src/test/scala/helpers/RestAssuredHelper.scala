@@ -1,4 +1,4 @@
-package io.restassured.ScalaHelper
+package org.acme
 
 import io.restassured.RestAssured.*
 import io.restassured.response.{Response, ValidatableResponse}

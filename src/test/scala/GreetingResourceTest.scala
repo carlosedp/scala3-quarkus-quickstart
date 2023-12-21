@@ -2,15 +2,13 @@ package org.acme
 
 import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Test
-// Let's import the Scala helper to provide a more idiomatic Scala DSL
-import io.restassured.ScalaHelper.*
 import org.hamcrest.CoreMatchers.is
 
 @QuarkusTest
-class GreetingResourceSpec:
+class GreetingResourceTest:
 
     @Test
-    def testHelloEndpoint(): Unit =
+    def `Greeting returns success and expected body`(): Unit =
         Given()
             .When(
                 _.get("/hello")
