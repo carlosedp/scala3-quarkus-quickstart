@@ -1,4 +1,4 @@
-package org.acme
+package helpers
 
 import io.restassured.RestAssured.*
 import io.restassured.response.{Response, ValidatableResponse}

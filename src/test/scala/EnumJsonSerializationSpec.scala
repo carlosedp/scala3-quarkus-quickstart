@@ -26,15 +26,16 @@ class Scala3ObjectMapperCustomizerTest:
 
     @Test
     def parseJsonToScalaObject =
-        val sampleSomethingJSON: String = """
-            {
-            "name": "My Something",
-            "someEnum": "A",
-            "other": {
-                "foo": "bar"
-              }
-            }
-            """
+        val sampleSomethingJSON = """
+                                    |{
+                                    |"name": "My Something",
+                                    |"someEnum": "A",
+                                    |"other": {
+                                    |    "foo": "bar"
+                                    |  }
+                                    |}
+                                    |""".stripMargin
+
         val parsed = objectMapper.readValue[Something](sampleSomethingJSON, classOf[Something])
         assertEquals(parsed.name, "My Something")
         assertEquals(parsed.someEnum, AnEnum.A)

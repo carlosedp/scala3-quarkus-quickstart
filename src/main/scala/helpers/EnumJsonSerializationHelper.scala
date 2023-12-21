@@ -1,4 +1,4 @@
-package org.acme
+package helper
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule

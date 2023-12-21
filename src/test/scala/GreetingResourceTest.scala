@@ -3,6 +3,7 @@ package org.acme
 import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Test
 import org.hamcrest.CoreMatchers.is
+import helpers.*
 
 @QuarkusTest
 class GreetingResourceTest:
