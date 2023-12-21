@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
+import com.fasterxml.jackson.annotation.{JsonProperty, JsonValue}
 
 import jakarta.inject.Inject
 
@@ -11,11 +12,12 @@ enum AnEnum:
     case A extends AnEnum
     case B extends AnEnum
 
-case class Other(foo: String)
+case class Other(@JsonProperty("foo") foo: String)
+
 case class Something(
-    name:     String,
-    someEnum: AnEnum,
-    other:    Other,
+    @JsonProperty("name") name:         String,
+    @JsonProperty("someEnum") someEnum: AnEnum,
+    @JsonValue other:                   Other,
   )
 
 @QuarkusTest
