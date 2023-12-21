@@ -42,7 +42,6 @@ class Scala3ObjectMapperCustomizerTest:
         assertEquals(parsed.name, "My Something")
         assertEquals(parsed.someEnum, AnEnum.A)
         assertEquals(parsed.other.foo, "bar")
-    end parseJsonToScalaObject
 
     @Test
     def generateJsonFromScalaObject =

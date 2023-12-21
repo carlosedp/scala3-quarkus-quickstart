@@ -28,7 +28,6 @@ class GivenConstructor(givenBlock: RequestSpecification => RequestSpecification)
             val appliedGiven: RequestSpecification = givenBlock.apply(`given`())
             val appliedWhen:  Response             = whenBlock.apply(appliedGiven)
             validatable.apply(appliedWhen.`then`())
-        end Then
     end ExpectationConstructor
 end GivenConstructor
 
@@ -85,4 +84,3 @@ end Given
 def When(whenBlock: RequestSpecification => Response) =
     def blankGiven(givenBlock: RequestSpecification): RequestSpecification = `given`()
     Given(blankGiven).When(whenBlock)
-end When
