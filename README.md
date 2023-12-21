@@ -2,9 +2,22 @@
 
 This project is quickstart using Scala 3 and Quarkus, the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/.
+If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
-To learn more about Scala and new in Scala 3, check-out https://docs.scala-lang.org/scala3/new-in-scala3.html,
+To learn more about Scala and new in Scala 3, check-out <https://docs.scala-lang.org/scala3/new-in-scala3.html>.
+
+## Development tools recommendation
+
+To start developing in Quarkus/Scala 3, I recommend the following:
+
+- [Coursier](https://get-coursier.io/) to manage Scala tools and JVM install
+- GraalVM 21 installed thru Coursier
+- [Quarkus CLI](https://quarkus.io/get-started/)
+- [VSCode](https://code.visualstudio.com/) as IDE
+- The following VSCode Extensions
+  - [Metals](https://marketplace.visualstudio.com/items?itemName=scalameta.metals) by ScalaMeta
+  - [Scala Syntax](https://marketplace.visualstudio.com/items?itemName=scala-lang.scala)
+  - [Scaladex search](https://marketplace.visualstudio.com/items?itemName=baccata.scaladex-search)
 
 ## Running the application in dev mode
 
