@@ -25,7 +25,7 @@ class Scala3ObjectMapperCustomizerTest:
     var objectMapper: ObjectMapper = null
 
     @Test
-    def `Jackson ObjectMapper can parse Scala 3 members`: Unit =
+    def parseJsonToScalaObject =
         val sampleSomethingJSON: String = """
             {
             "name": "My Something",
@@ -39,10 +39,10 @@ class Scala3ObjectMapperCustomizerTest:
         assertEquals(parsed.name, "My Something")
         assertEquals(parsed.someEnum, AnEnum.A)
         assertEquals(parsed.other.foo, "bar")
-    end `Jackson ObjectMapper can parse Scala 3 members`
+    end parseJsonToScalaObject
 
     @Test
-    def `Jackson ObjectMapper can generate Json from Scala 3 class`: Unit =
+    def generateJsonFromScalaObject =
         val something = Something("My Something", AnEnum.A, Other("bar"))
         val json      = objectMapper.writeValueAsString(something)
         assertEquals(json, """{"name":"My Something","someEnum":"A","other":{"foo":"bar"}}""")

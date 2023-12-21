@@ -8,7 +8,7 @@ import org.hamcrest.CoreMatchers.is
 class GreetingResourceTest:
 
     @Test
-    def `Greeting returns success and expected body`(): Unit =
+    def testHelloEndpoint() =
         Given()
             .When(
                 _.get("/hello")
