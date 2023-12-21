@@ -46,9 +46,10 @@ jobs:
 
       - name: Build quarkus-scala3 until it's published
         run: |
-          git clone https://github.com/quarkiverse/quarkus-scala3
-          cd quarkus-scala3
+          git clone https://github.com/quarkiverse/quarkus-scala3 ${{ runner.temp }}/quarkus-scala3
+          pushd ${{ runner.temp }}/quarkus-scala3
           mvn install
+          popd
 
       - name: Build and Test with Maven
         run: ./mvnw -B verify
