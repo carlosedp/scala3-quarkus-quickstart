@@ -6,7 +6,7 @@ This project is quickstart using Scala 3 and Quarkus, the Supersonic Subatomic J
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
-To learn more about Scala and new in Scala 3, check-out <https://docs.scala-lang.org/scala3/new-in-scala3.html>.
+To learn more about Scala and new in [Scala 3](https://docs.scala-lang.org/scala3/book/introduction.html), check-out <https://docs.scala-lang.org/scala3/new-in-scala3.html>.
 
 ## Development tools recommendation
 
@@ -22,21 +22,11 @@ To start developing in Quarkus/Scala 3, I recommend the following:
   - [Scaladex search](https://marketplace.visualstudio.com/items?itemName=baccata.scaladex-search)
   - [Quarkus Tools](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-quarkus)
 
+The repository also comes with a [Github Action](https://github.com/carlosedp/scala3-quarkus-quickstart/actions/workflows/CI.yaml) that runs tests on PRs and pushes.
+
 ## Running the application in dev mode
 
-The project depends on the still-unpublished extension [quarkus-scala3](https://github.com/quarkiverse/quarkus-scala3) version (at least 0.0.2). Until it's published on Maven, build and install it locally with:
-
-```sh
-# You need maven installed
-git clone https://github.com/quarkiverse/quarkus-scala3
-cd quarkus-scala3
-mvn install
-cd ..
-```
-
-This will publish the latest SNAPSHOT version to your local machine (0.0.2-SNAPSHOT at the time of this writing).
-
-You can then, run your application in dev mode that enables live coding using:
+Run your application in dev mode that enables live coding using:
 
 ```shell script
 ./mvnw compile quarkus:dev

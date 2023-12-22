@@ -43,7 +43,7 @@
     <dependency>
       <groupId>io.quarkiverse.scala</groupId>
       <artifactId>quarkus-scala3</artifactId>
-      <version>0.0.2-SNAPSHOT</version>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
@@ -160,8 +160,6 @@
             <arg>-Wunused:all</arg>
             <arg>-feature</arg>
             <arg>-deprecation</arg>
-            <!-- <arg>-Wvalue-discard</arg> -->
-            <!-- <arg>-Wconf:msg=discarded non-Unit value of type io.restassured.response.ValidatableResponse:s</arg> -->
           </args>
         </configuration>
       </plugin>
