@@ -1,4 +1,4 @@
-package helpers
+package helper
 
 import io.restassured.RestAssured.*
 import io.restassured.response.{Response, ValidatableResponse}
