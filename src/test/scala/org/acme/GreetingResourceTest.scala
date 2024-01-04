@@ -8,43 +8,37 @@ import helper.*
 @QuarkusTest
 class GreetingResourceTest:
 
+    // Endpoint test helper
+    def testEndpoint(url: String, result: String) =
+        Given()
+            .When(
+                _.get(url)
+            ).Then(res =>
+                res.statusCode(200)
+                res.body(is(result))
+            )
+
     @Test
     def testHelloEndpoint() =
-        Given()
-            .When(
-                _.get("/hello")
-            ).Then(res =>
-                res.statusCode(200)
-                res.body(is("Hello from RESTEasy Reactive in Scala 3"))
-            )
+        testEndpoint("/hello", "Hello from RESTEasy Reactive in Scala 3")
 
     @Test
-    def testGreetEndpoint() =
-        Given()
-            .When(
-                _.get("/greet")
-            ).Then(res =>
-                res.statusCode(200)
-                res.body(is("Hello world from RESTEasy Reactive in Scala 3"))
-            )
+    def testGreetEndpointWithNoParam() =
+        testEndpoint("/greet", "Hello world from RESTEasy Reactive in Scala 3")
 
     @Test
-    def testGreetEndpointWithParam() =
-        Given()
-            .When(
-                _.get("/greet?name=quarkus")
-            ).Then(res =>
-                res.statusCode(200)
-                res.body(is("Hello quarkus from RESTEasy Reactive in Scala 3"))
-            )
+    def testGreetEndpointWithEmptyParam() =
+        testEndpoint("/greet?name=", "Hello  from RESTEasy Reactive in Scala 3")
+
+    @Test
+    def testGreetEndpointWithSingleParam() =
+        testEndpoint("/greet?name=quarkus", "Hello quarkus from RESTEasy Reactive in Scala 3")
 
     @Test
     def testGreetEndpointWithMultipleParam() =
-        Given()
-            .When(
-                _.get("/greet?name=quarkus&name=scala3")
-            ).Then(res =>
-                res.statusCode(200)
-                res.body(is("Hello quarkus and scala3 from RESTEasy Reactive in Scala 3"))
-            )
+        testEndpoint(
+            "/greet?name=quarkus&name=scala3",
+            "Hello quarkus and scala3 from RESTEasy Reactive in Scala 3",
+        )
+
 end GreetingResourceTest
