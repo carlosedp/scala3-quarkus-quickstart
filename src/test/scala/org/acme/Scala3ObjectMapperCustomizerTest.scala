@@ -1,12 +1,12 @@
 package org.acme
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import com.fasterxml.jackson.annotation.{JsonProperty, JsonValue}
 
 import jakarta.inject.Inject
+import com.fasterxml.jackson.databind.ObjectMapper
 
 enum AnEnum:
     case A extends AnEnum
@@ -23,6 +23,7 @@ case class Something(
 @QuarkusTest
 class Scala3ObjectMapperCustomizerTest:
 
+    // Obtain a reference to the ObjectMapper we defined in src/main/scala/helper/EnumJsonSerializationHelper.scala
     @Inject
     var objectMapper: ObjectMapper = null
 
