@@ -36,6 +36,8 @@ Run your application in dev mode that enables live coding using:
 quarkus dev
 ```
 
+Then open <http://localhost:8080> that shows Quarkus static demo page and the endpoints <http://localhost:8080/hello> or <http://localhost:8080/greet?name=Yourname> which are written in Scala provided by the [GreetingResource.scala](./src/main/scala/org/acme/GreetingResource.scala) source file.
+
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
 
 To run tests, use:

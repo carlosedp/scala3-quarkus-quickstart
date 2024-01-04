@@ -17,3 +17,24 @@ class GreetingResourceTest:
                 res.statusCode(200)
                 res.body(is("Hello from RESTEasy Reactive in Scala 3"))
             )
+
+    @Test
+    def testGreetEndpoint() =
+        Given()
+            .When(
+                _.get("/greet")
+            ).Then(res =>
+                res.statusCode(200)
+                res.body(is("Hello world from RESTEasy Reactive in Scala 3"))
+            )
+
+    @Test
+    def testGreetEndpointWithParam() =
+        Given()
+            .When(
+                _.get("/greet?name=quarkus")
+            ).Then(res =>
+                res.statusCode(200)
+                res.body(is("Hello quarkus from RESTEasy Reactive in Scala 3"))
+            )
+end GreetingResourceTest
