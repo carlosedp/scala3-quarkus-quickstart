@@ -143,6 +143,7 @@
         <version>${scala-maven-plugin.version}</version>
         <executions>
           <execution>
+            <?m2e ignore?>
             <id>scala-compile-first</id>
             <phase>process-resources</phase>
             <goals>
@@ -151,6 +152,7 @@
             </goals>
           </execution>
           <execution>
+            <?m2e ignore?>
             <id>scala-test-compile</id>
             <phase>process-test-resources</phase>
             <goals>
