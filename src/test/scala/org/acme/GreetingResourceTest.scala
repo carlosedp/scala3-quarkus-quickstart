@@ -37,4 +37,14 @@ class GreetingResourceTest:
                 res.statusCode(200)
                 res.body(is("Hello quarkus from RESTEasy Reactive in Scala 3"))
             )
+
+    @Test
+    def testGreetEndpointWithMultipleParam() =
+        Given()
+            .When(
+                _.get("/greet?name=quarkus&name=scala3")
+            ).Then(res =>
+                res.statusCode(200)
+                res.body(is("Hello quarkus and scala3 from RESTEasy Reactive in Scala 3"))
+            )
 end GreetingResourceTest

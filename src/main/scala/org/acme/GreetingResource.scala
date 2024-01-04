@@ -15,5 +15,6 @@ class GreetingResource:
 class GreetingEndpoint:
     @GET
     @Produces(Array[String](core.MediaType.TEXT_PLAIN))
-    def greeting(@RestQuery @DefaultValue("world") name: String) =
-        s"Hello $name from RESTEasy Reactive in Scala 3"
+    def greeting(@RestQuery @DefaultValue("world") name: Array[String]) =
+        val names = name.mkString(" and ")
+        s"Hello ${names} from RESTEasy Reactive in Scala 3"
