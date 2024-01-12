@@ -1,0 +1,10 @@
+auth:
+  type: DISABLED
+kafka:
+  clusters:
+  - bootstrapServers: kafka:9092
+    name: Docker-compose
+    properties: {}
+    readOnly: false
+rbac:
+  roles: []

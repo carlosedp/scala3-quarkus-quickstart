@@ -22,7 +22,6 @@ bin/
 nb-configuration.xml
 
 # Visual Studio Code / Scala
-.vscode
 .factorypath
 .metals
 .bloop

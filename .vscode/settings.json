@@ -1,0 +1,15 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "files.watcherExclude": {
+    "**/target": true
+  },
+  "microprofile.tools.validation.unknown.excluded": [
+    "*/mp-rest/providers/*/priority",
+    "mp.openapi.schema.*",
+    "kafka-streams.*",
+    "camel.*",
+    "quarkus.jacoco.*",
+    "kafka.*",
+    "mp.*"
+  ]
+}
