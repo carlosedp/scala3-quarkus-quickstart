@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Articles</title>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Submit Articles for Processing</h2>
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id" size=40><br>
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" size=50><br><br>
+        <input class="btn btn-info" id="send-article" type="submit" value="Submit">
+        <div class="articles-div">
+          <h2>Articles</h2>
+          <table style="width:100%" class="pf-v5-c-table pf-m-grid-md" role="grid"
+            aria-label="This is a simple table example" id="table-basic">
+            <Thead class="pf-v5-c-table__thead">
+              <tr class="pf-v5-c-table__tr" role="row">
+                <th style="width:30%" class="pf-v5-c-table__th" role="columnheader" scope="col">Article ID</th>
+                <th style="width:50%" class="pf-v5-c-table__th" role="columnheader" scope="col">Article Title</th>
+                <th style="width:20%" class="pf-v5-c-table__th" role="columnheader" scope="col">Processing Status</th>
+              </tr>
+            </Thead>
+            <Tbody class="pf-v5-c-table__tbody" role="rowgroup" id="articles"></Tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  // This function fetches UUID from server on /articles/uuid on page load and set it in the ID field
+  function fetchUUID() {
+    fetch("/article/uuid")
+      .then(res => res.text())
+      .then(uuid => $("#id").val(uuid));
+  }
+
+  // Fetch UUID on page load
+  fetchUUID();
+
+  // Send article to server on click
+  $("#send-article").click((event) => {
+    var article_id = $("#id").val();
+    var article_title = $("#title").val();
+    fetch("/article", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        id: article_id,
+        title: article_title
+      })
+    }).then(res => res.text())
+    var row = $(`<tr class="pf-v5-c-table__tr" role="row" id='${article_id}'>
+                  <td class="pf-v5-c-table__td" role="cell" data-label="id">${article_id}</td>
+                  <td class="pf-v5-c-table__td" role="cell" data-label="title">${article_title}</td>
+                  <td class="pf-v5-c-table__td article_id" role="cell" data-label="status">✳️ Pending processing...</td>
+                </tr>`);
+    $("#articles").append(row);
+
+    // Fetch a new UUID and clean the title field
+    fetchUUID();
+    $("#title").val("");
+  });
+
+  var source = new EventSource("/article/stream");
+  source.onmessage = (event) => {
+    var json = JSON.parse(event.data);
+    console.log("Received event: " + event.data);
+    // Update the article ID row with the new status and article name
+    if (json.processed == true) {
+      $(`#${json.id}`).find(".article_id").text("✅ Processed");
+      $(`#${json.id}`).find(".pf-v5-c-table__td").css("color", "green");
+    } else {
+      $(`#${json.id}`).find(".article_id").text("❎ Failed to process");
+      $(`#${json.id}`).find(".pf-v5-c-table__td").css("color", "red");
+    }
+  };
+</script>
+
+</html>

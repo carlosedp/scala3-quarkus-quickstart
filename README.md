@@ -40,6 +40,12 @@ Then open <http://localhost:8080> that shows Quarkus static demo page and the en
 
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
 
+The sample repository also provides a sample Apache Kafka app containing a Producer, a Consumer and a Processor.
+
+![article submission sample](./docs/articles.png)
+
+This sample uses Kafka as a messaging middleware passing the data between each component and showing an HTML interface at <http://localhost:8080/articles.html>. The built-in Kafka UI can be seen at <http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics>.
+
 To run tests, use:
 
 ```sh
