@@ -29,6 +29,12 @@ class ArticleProducerConsumerTest(@Connector("smallrye-in-memory") connector: In
         assertEquals(article.toString(), s"Article(id=1, title=Test article, processed=false)")
 
     @Test
+    def testArticleDeserializer() =
+        val articleJson = """{"id":"1","title":"Test article", "processed":false}"""
+        val article     = ArticleDeserializer().deserialize("articles", articleJson.getBytes())
+        assertEquals(article, Article("1", "Test article", false))
+
+    @Test
     def testUUIDGenerator() =
         Given()
             .When(
