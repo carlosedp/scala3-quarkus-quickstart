@@ -21,7 +21,7 @@ class ArticleDeserializer extends ObjectMapperDeserializer[Article](classOf[Arti
 class ArticleProducer(@Channel("requests-out") emitter: MutinyEmitter[Article]):
     // Create an HTML page with a form to submit a new article
     @GET
-    @Produces(Array[String](core.MediaType.TEXT_HTML))
+    @Produces(Array(core.MediaType.TEXT_HTML))
     def article() =
         val uuid = UUID.randomUUID().toString()
         s"""
@@ -44,7 +44,7 @@ class ArticleProducer(@Channel("requests-out") emitter: MutinyEmitter[Article]):
 
     // Endpoint to submit a new article
     @POST
-    @Produces(Array[String](core.MediaType.TEXT_HTML))
+    @Produces(Array(core.MediaType.TEXT_HTML))
     def articlePost(@RestForm id: String, @RestForm title: String): io.smallrye.mutiny.Uni[String] =
         // Publish the article to the Kafka topic
         emitter.send(Article(id, title))
