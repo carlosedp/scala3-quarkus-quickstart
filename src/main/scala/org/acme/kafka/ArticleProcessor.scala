@@ -1,4 +1,4 @@
-package org.acme
+package org.acme.kafka
 
 import io.quarkus.logging.Log
 

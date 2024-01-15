@@ -1,4 +1,4 @@
-package org.acme
+package org.acme.kafka
 
 import java.util.UUID;
 import jakarta.ws.rs.{GET, POST, Path, Produces, core}
