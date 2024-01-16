@@ -83,7 +83,7 @@
     var json = JSON.parse(event.data);
     console.log("Received event: " + event.data);
     // Update the article ID row with the new status and article name
-    if (json.processed == true) {
+    if (json.processed) {
       $(`#${json.id}`).find(".article_id").text("✅ Processed");
       $(`#${json.id}`).find(".pf-v5-c-table__td").css("color", "green");
     } else {
