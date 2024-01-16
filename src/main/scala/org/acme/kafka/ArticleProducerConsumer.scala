@@ -18,14 +18,14 @@ class ArticleProducerConsumer(
     @GET
     @Path("/uuid")
     @Produces(Array(core.MediaType.TEXT_PLAIN))
-    def uuid() = UUID.randomUUID().toString()
+    def uuid() = UUID.randomUUID().toString
 
     // Endpoint to submit a new article receiving data as a JSON string to Kafka topic articles
     @POST
     @Consumes(Array(core.MediaType.APPLICATION_JSON))
     @Produces(Array(core.MediaType.TEXT_PLAIN))
     def articlePost(article: Article): io.smallrye.mutiny.Uni[String] =
-        Log.debug(s"Received article for processing: ${article}")
+        Log.debug(s"Received article for processing: $article")
         // Publish the article to the Kafka topic
         emitter.send(article)
             // Return the article ID
