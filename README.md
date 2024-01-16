@@ -16,6 +16,7 @@ To start developing in Quarkus/Scala 3, I recommend the following:
 
 - [Coursier](https://get-coursier.io/) to manage Scala tools and JVM install
 - GraalVM 21 installed thru Coursier
+- Install scalafmt and scalafix thru Coursier
 - [Quarkus CLI](https://quarkus.io/get-started/)
 - [VSCode](https://code.visualstudio.com/) as IDE
 - The following VSCode Extensions
@@ -93,6 +94,15 @@ You can then execute your native executable with: `./target/code-with-quarkus-1.
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
 
 ## Provided Code
+
+To reuse this code as a template for your own applications, remember to change the following:
+
+- Create account on [Sonarcloud](https://sonarcloud.io) for analisys and [Codecov](https://app.codecov.io/) if desired
+- Create account on [Mergify](https://dashboard.mergify.com/) if desired and configure the actions on `.mergify.yml`
+- Update readme pointing to your own Sonarcloud (if kept), Codecov and GitHub action badges
+- If Sonarcloud is not needed, change:
+  - Remove the GitHub action (./github/workflows/CI.yaml) cache task and update the test task removing additional sonar mvn tasks
+  - Remove `sonar` properties from pom.xml
 
 ### RESTEasy Reactive
 
