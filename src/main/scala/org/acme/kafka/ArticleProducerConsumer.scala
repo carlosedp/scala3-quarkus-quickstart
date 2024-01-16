@@ -1,13 +1,12 @@
 package org.acme.kafka
 
-import java.util.UUID;
-import jakarta.ws.rs.{GET, POST, Path, Produces, core}
+import java.util.UUID
 
-import org.eclipse.microprofile.reactive.messaging.Channel
-import io.smallrye.reactive.messaging.MutinyEmitter
-import io.smallrye.mutiny.Multi
 import io.quarkus.logging.Log
-import jakarta.ws.rs.Consumes
+import io.smallrye.mutiny.Multi
+import io.smallrye.reactive.messaging.MutinyEmitter
+import jakarta.ws.rs.{Consumes, GET, POST, Path, Produces, core}
+import org.eclipse.microprofile.reactive.messaging.Channel
 
 @Path("/article")
 class ArticleProducerConsumer(

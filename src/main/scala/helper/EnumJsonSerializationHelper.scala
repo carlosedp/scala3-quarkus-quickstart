@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import com.github.pjfanning.`enum`.EnumModule
 import io.quarkus.jackson.ObjectMapperCustomizer
-
 import jakarta.inject.Singleton
 
 @Singleton

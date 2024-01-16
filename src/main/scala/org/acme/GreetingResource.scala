@@ -1,8 +1,7 @@
 package org.acme
 
-import jakarta.ws.rs.{GET, Path, Produces, core}
+import jakarta.ws.rs.{DefaultValue, GET, Path, Produces, core}
 import org.jboss.resteasy.reactive.RestQuery
-import jakarta.ws.rs.DefaultValue
 
 @Path("/")
 class GreetingResource:

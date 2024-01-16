@@ -1,9 +1,9 @@
 package org.acme
 
-import io.quarkus.test.junit.QuarkusTest
-import org.junit.jupiter.api.Test
-import org.hamcrest.CoreMatchers.is
 import helper.*
+import io.quarkus.test.junit.QuarkusTest
+import org.hamcrest.CoreMatchers.is
+import org.junit.jupiter.api.Test
 
 @QuarkusTest
 class GreetingResourceTest:

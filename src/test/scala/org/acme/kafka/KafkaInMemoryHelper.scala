@@ -1,8 +1,9 @@
 package org.acme.kafka
 
 import java.util.HashMap
-import io.smallrye.reactive.messaging.memory.InMemoryConnector
+
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager
+import io.smallrye.reactive.messaging.memory.InMemoryConnector
 
 class KafkaResourceLivecycleManager extends QuarkusTestResourceLifecycleManager:
     @Override

@@ -1,12 +1,11 @@
 package org.acme
 
+import com.fasterxml.jackson.annotation.{JsonProperty, JsonValue}
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.quarkus.test.junit.QuarkusTest
+import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import com.fasterxml.jackson.annotation.{JsonProperty, JsonValue}
-
-import jakarta.inject.Inject
-import com.fasterxml.jackson.databind.ObjectMapper
 
 enum AnEnum:
     case A extends AnEnum

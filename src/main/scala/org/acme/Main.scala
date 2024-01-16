@@ -1,9 +1,8 @@
 package org.acme
 
-import io.quarkus.runtime.annotations.QuarkusMain
-import io.quarkus.runtime.Quarkus
-import io.quarkus.runtime.QuarkusApplication
 import io.quarkus.logging.Log
+import io.quarkus.runtime.annotations.QuarkusMain
+import io.quarkus.runtime.{Quarkus, QuarkusApplication}
 
 @QuarkusMain
 class Main

@@ -1,11 +1,9 @@
 package org.acme.kafka
 
 import io.quarkus.logging.Log
-
-import jakarta.enterprise.context.ApplicationScoped
-import org.eclipse.microprofile.reactive.messaging.Incoming
-import org.eclipse.microprofile.reactive.messaging.Outgoing
 import io.smallrye.reactive.messaging.annotations.Blocking
+import jakarta.enterprise.context.ApplicationScoped
+import org.eclipse.microprofile.reactive.messaging.{Incoming, Outgoing}
 
 @ApplicationScoped
 class ArticleProcessor:

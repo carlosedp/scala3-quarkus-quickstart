@@ -188,6 +188,7 @@
             <arg>-Wunused:all</arg>
             <arg>-feature</arg>
             <arg>-deprecation</arg>
+            <arg>-Ysemanticdb</arg>
           </args>
         </configuration>
       </plugin>

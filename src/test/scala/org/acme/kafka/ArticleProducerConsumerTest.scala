@@ -1,20 +1,17 @@
 package org.acme.kafka
 
-import io.quarkus.test.junit.QuarkusTest
+import com.fasterxml.jackson.databind.ObjectMapper
+import helper.*
 import io.quarkus.test.common.QuarkusTestResource
-import org.eclipse.microprofile.reactive.messaging.spi.Connector
+import io.quarkus.test.junit.QuarkusTest
 import io.smallrye.reactive.messaging.memory.InMemoryConnector
-
-import org.junit.jupiter.api.Test
+import jakarta.inject.Inject
+import jakarta.ws.rs.core.MediaType
 import org.awaitility.Awaitility.await
+import org.eclipse.microprofile.reactive.messaging.spi.Connector
 import org.hamcrest.CoreMatchers.{is, notNullValue}
 import org.junit.jupiter.api.Assertions.*
-import jakarta.ws.rs.core.MediaType
-
-import jakarta.inject.Inject
-import com.fasterxml.jackson.databind.ObjectMapper
-
-import helper.*
+import org.junit.jupiter.api.Test
 
 @QuarkusTest
 @QuarkusTestResource(classOf[KafkaResourceLivecycleManager])
@@ -26,7 +23,7 @@ class ArticleProducerConsumerTest(@Connector("smallrye-in-memory") connector: In
     @Test
     def testArticleString() =
         val article = Article("1", "Test article")
-        assertEquals(article.toString(), s"Article(id=1, title=Test article, processed=false)")
+        assertEquals(article.toString(), "Article(id=1, title=Test article, processed=false)")
 
     @Test
     def testArticleDeserializer() =

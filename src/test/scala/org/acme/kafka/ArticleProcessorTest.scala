@@ -1,12 +1,12 @@
 package org.acme.kafka
 
-import org.eclipse.microprofile.reactive.messaging.spi.Connector
-import io.smallrye.reactive.messaging.memory.InMemoryConnector
-import io.quarkus.test.junit.QuarkusTest
 import io.quarkus.test.common.QuarkusTestResource
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.Assertions.*
+import io.quarkus.test.junit.QuarkusTest
+import io.smallrye.reactive.messaging.memory.InMemoryConnector
 import org.awaitility.Awaitility.await
+import org.eclipse.microprofile.reactive.messaging.spi.Connector
+import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 
 @QuarkusTest
 @QuarkusTestResource(classOf[KafkaResourceLivecycleManager])
