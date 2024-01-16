@@ -13,4 +13,4 @@ case class User(
   ) derives DbCodec
 
 @ApplicationScoped
-class UserRepository extends Repo[UserCreateCommand, User, Long]
+class UserRepository extends Repo[UserCreateUpdateCommand, User, Long]

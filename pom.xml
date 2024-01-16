@@ -97,6 +97,14 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
+
+    <!-- Narayana JTA dependencies, added to be more explicit, it is
+         otherwise included because of hibernate-orm extension -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-narayana-jta</artifactId>
+    </dependency>
+
     <!-- Flyway specific dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
