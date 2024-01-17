@@ -48,11 +48,9 @@ The sample repository also provides a sample Apache Kafka app containing a Produ
 This sample uses Kafka as a messaging middleware passing the data between each component and showing an HTML interface at <http://localhost:8080/articles.html>. The built-in Kafka UI can be seen at <http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics>.
 
 The persistence examples include JPA with Hibernate ORM, and the new kid on the Scala 3 block, [Magnum](https://github.com/AugustNagro/magnum).
-Following the Magnum example you can easily also integrate Anorm, Slick or Doobie. Doobie is a bit more complex as you will 
-have to bridge Cats Effect IO to CompletionStage/CompletableFuture. If you feel adventurous you can try bridging with 
-SmallRye Mutiny Uni, which is lazy by default and more close in behaviour to Cats Effect IO.
+Following the Magnum example you can easily also integrate Anorm, Slick or Doobie. Doobie is a bit more complex as you will have to bridge Cats Effect IO to CompletionStage/CompletableFuture. If you feel adventurous you can try bridging with SmallRye Mutiny Uni, which is lazy by default and more close in behaviour to Cats Effect IO.
 
-The hibernate example is really un-Scala like, but it's there for reference. Some other Quarkus integrations might expect JPA to be present so there it is. 
+The hibernate example is really un-Scala like, but it's there for reference. Some other Quarkus integrations might expect JPA to be present so there it is.
 
 To run tests, use:
 

@@ -10,6 +10,7 @@
     "camel.*",
     "quarkus.jacoco.*",
     "kafka.*",
-    "mp.*"
+    "mp.*",
+    "quarkus.datasource.*",
   ]
 }

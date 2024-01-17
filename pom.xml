@@ -32,6 +32,7 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+    <!-- ######## Quarkus Main Dependencies ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
@@ -40,6 +41,7 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-reactive</artifactId>
     </dependency>
+    <!-- ######## Quarkus Scala 3 ######## -->
     <dependency>
       <groupId>io.quarkiverse.scala</groupId>
       <artifactId>quarkus-scala3</artifactId>
@@ -50,9 +52,14 @@
       <artifactId>scala3-compiler_3</artifactId>
       <version>${scala.version}</version>
     </dependency>
+    <!-- ######## Quarkus Jackson and Scala Integration  ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>com.github.pjfanning</groupId>
@@ -64,6 +71,7 @@
       <artifactId>jackson-module-scala_3</artifactId>
       <version>2.15.0</version>
     </dependency>
+    <!-- ######## Quarkus Kafka #### -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
@@ -73,21 +81,19 @@
       <artifactId>smallrye-reactive-messaging-in-memory</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- ######## Await for events in test cases ######## -->
     <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
       <version>4.2.0</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
-    </dependency>
+    <!-- ######## Quarkus Health Check Endpoints ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-    <!-- Hibernate ORM specific dependencies -->
+    <!-- ######## Hibernate ORM specific dependencies ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-orm</artifactId>
@@ -97,26 +103,23 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
-
-    <!-- Narayana JTA dependencies, added to be more explicit, it is
-         otherwise included because of hibernate-orm extension -->
+    <!-- Narayana JTA dependencies, added to be more explicit, it is otherwise included because of hibernate-orm extension -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-narayana-jta</artifactId>
     </dependency>
-
-    <!-- Flyway specific dependencies -->
+    <!-- Flyway DB migration specific dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-flyway</artifactId>
     </dependency>
-
+    <!-- ######## Scala 3 Magnum DB Library ######## -->
     <dependency>
       <groupId>com.augustnagro</groupId>
       <artifactId>magnum_3</artifactId>
       <version>1.1.0</version>
     </dependency>
-
+    <!-- ######## Quarkus JUnit test dependencies ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -198,6 +201,7 @@
         <version>${scala-maven-plugin.version}</version>
         <executions>
           <execution>
+            <?m2e ignore?>
             <id>scala-compile-first</id>
             <phase>process-resources</phase>
             <goals>
@@ -206,6 +210,7 @@
             </goals>
           </execution>
           <execution>
+            <?m2e ignore?>
             <id>scala-test-compile</id>
             <phase>process-test-resources</phase>
             <goals>
