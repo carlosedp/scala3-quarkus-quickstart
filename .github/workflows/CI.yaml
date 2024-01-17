@@ -32,12 +32,6 @@ jobs:
           distribution: "temurin"
           java-version: "21"
 
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v3
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
@@ -48,8 +42,7 @@ jobs:
       - name: Build and Test with Maven
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=carlosedp_scala3-quarkus-quickstart
+        run: ./mvnw -B verify
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
