@@ -8,6 +8,6 @@ case class Article(
     processed: Boolean = false,
   ):
     // Override toString to print the article in a readable format
-    override def toString() = s"Article(id=${id}, title=${title}, processed=${processed})"
+    override def toString = s"Article(id=$id, title=$title, processed=$processed)"
 
 class ArticleDeserializer extends ObjectMapperDeserializer[Article](classOf[Article])
