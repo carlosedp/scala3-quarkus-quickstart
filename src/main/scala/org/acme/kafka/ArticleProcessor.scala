@@ -13,6 +13,6 @@ class ArticleProcessor:
     def processArticle(article: Article) =
         Log.info(s"Received article: ${article}")
         Thread.sleep(1500)
-        val processedArticle = article.copy(processed = true)
+        val processedArticle = article.copy(status = ArticleStatus.Processed)
         Log.info(s"Processed article: ${processedArticle}")
         processedArticle

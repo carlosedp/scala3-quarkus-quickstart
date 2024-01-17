@@ -20,4 +20,4 @@ class ArticleProcessorTest(@Connector("smallrye-in-memory") connector: InMemoryC
         articles.send(article)
         await().until(() => processedArticles.received().size() == 1)
         val processedArticle = processedArticles.received().get(0).getPayload()
-        assertEquals(processedArticle, article.copy(processed = true))
+        assertEquals(processedArticle, article.copy(status = ArticleStatus.Processed))

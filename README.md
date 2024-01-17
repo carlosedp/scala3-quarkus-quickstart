@@ -105,6 +105,7 @@ To reuse this code as a template for your own applications, remember to change t
 - Create account on [Sonarcloud](https://sonarcloud.io) for analisys and [Codecov](https://app.codecov.io/) if desired
 - Create account on [Mergify](https://dashboard.mergify.com/) if desired and configure the actions on `.mergify.yml`
 - Update readme pointing to your own Sonarcloud (if kept), Codecov and GitHub action badges
+- For database, if using Hibernate, you can remove Scala 3 Magnum dependencies, if using Magnum, can remove Hibernate
 
 ### RESTEasy Reactive
 

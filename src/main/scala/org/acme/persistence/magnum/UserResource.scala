@@ -21,3 +21,4 @@ class UserResource(private val userService: UserService):
         userService
             .updateUser(id, user)
             .getOrElse(throw NotFoundException("User not found"))
+end UserResource
