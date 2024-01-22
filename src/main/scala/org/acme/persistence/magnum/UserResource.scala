@@ -13,13 +13,13 @@ class UserResource(
   ):
 
     @POST
-    @Consumes(Array("application/json"))
-    @Produces(Array("application/json"))
+    @Consumes(Array(core.MediaType.APPLICATION_JSON))
+    @Produces(Array(core.MediaType.APPLICATION_JSON))
     def createUser(userCreateCommand: UserCreateUpdateCommand): User =
         userService.create(userCreateCommand)
 
     @GET
-    @Produces(Array("application/json"))
+    @Produces(Array(core.MediaType.APPLICATION_JSON))
     def getUsers: Vector[User] =
         userService.getAll
 
@@ -41,15 +41,15 @@ class UserResource(
 
     @GET
     @Path("/users-page")
-    @Produces(Array("text/html"))
+    @Produces(Array(core.MediaType.TEXT_HTML))
     @Blocking
     def getUsersPage: TemplateInstance =
         userPage.data("page", UserPageData("Users", userService.getAll.asJava))
 
     @POST
     @Path("/users-page")
-    @Consumes(Array("application/x-www-form-urlencoded"))
-    @Produces(Array("text/html"))
+    @Consumes(Array(core.MediaType.APPLICATION_FORM_URLENCODED))
+    @Produces(Array(core.MediaType.TEXT_HTML))
     @Blocking
     def createUserPage(
         @FormParam("name") name:         String,
