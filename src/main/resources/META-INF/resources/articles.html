@@ -66,9 +66,9 @@
       })
     }).then(res => res.text())
     var row = $(`<tr id='${article_id}'>
-                  <td data-label="id">${article_id}</td>
-                  <td data-label="title">${article_title}</td>
-                  <td class="article_id" data-label="status">✳️ Pending processing...</td>
+                  <td>${article_id}</td>
+                  <td>${article_title}</td>
+                  <td class="article_id">✳️ Pending processing...</td>
                 </tr>`);
     $("#articles").append(row);
 

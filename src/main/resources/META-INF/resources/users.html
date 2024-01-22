@@ -13,37 +13,31 @@
 
 <body>
   <div class="container">
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title">Create new Users</h2>
-        <input type="hidden" id="id" name="id" size=50>
-        <label for="title">Name:</label><br>
-        <input type="text" id="name" name="name" size=50><br><br>
-        <label for="title">Email:</label><br>
-        <input type="text" id="email" name="email" size=50><br><br>
-        <label for="title">Password:</label><br>
-        <input type="text" id="password" name="password" size=50><br><br>
-        <input class="btn btn-info" id="send-user" type="submit" value="Submit">
-        <br>
-        <hr>
-        <br>
-        <div class="users-div">
-          <h2>Users</h2>
-          <input class="btn btn-info" id="get-users" type="submit" value="Get Users">
-          <br><br>
-          <table class="table table-striped table-bordered table-hover" id="table1">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th colspan="2">Actions</th>
-              </tr>
-            </thead>
-            <tbody id="users"></tbody>
-          </table>
-        </div>
-      </div>
+    <h2 class="card-title">Create new Users</h2>
+    <input type="hidden" id="id" name="id" size=50>
+    <label for="title">Name:</label><br>
+    <input type="text" id="name" name="name" size=50><br>
+    <label for="title">Email:</label><br>
+    <input type="text" id="email" name="email" size=50><br>
+    <label for="title">Password:</label><br>
+    <input type="text" id="password" name="password" size=50><br><br>
+    <input class="btn btn-info" id="send-user" type="submit" value="Submit">
+    <hr>
+    <div class="users-div">
+      <h2>Users</h2>
+      <input class="btn btn-info" id="get-users" type="submit" value="Get Users">
+      <br><br>
+      <table class="table table-striped table-bordered table-hover" id="table1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="users"></tbody>
+      </table>
     </div>
   </div>
 </body>
@@ -80,12 +74,12 @@
         $("#users").empty();
         json.forEach(user => {
           var row = $(`<tr id='${user.id}'>
-                        <td data-label="id">${user.id}</td>
-                        <td data-label="title">${user.name}</td>
-                        <td data-label="title">${user.email}</td>
-                        <td data-label="title">
-                          <button class="btn btn-default" id="update-user" type="submit" value="Update">Update</button>
-                          <button class="btn btn-default" id="delete-user" type="submit" value="Delete">Delete</button>
+                        <td>${user.id}</td>
+                        <td>${user.name}</td>
+                        <td>${user.email}</td>
+                        <td>
+                          <button class="btn btn-default" id="update-user" type="submit">Update</button>
+                          <button class="btn btn-default" id="delete-user" type="submit">Delete</button>
                         </td>
                       </tr>`);
           $("#users").append(row);
