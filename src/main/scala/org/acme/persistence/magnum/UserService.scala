@@ -28,4 +28,8 @@ class UserService(private val userRepo: UserRepository, private val ds: AgroalDa
             yield
                 userRepo.update(updated)
                 updated
+
+    def deleteUser(id: Long): Unit =
+        connect(ds):
+            userRepo.deleteById(id)
 end UserService

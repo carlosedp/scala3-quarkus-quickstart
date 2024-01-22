@@ -21,4 +21,10 @@ class UserResource(private val userService: UserService):
         userService
             .updateUser(id, user)
             .getOrElse(throw NotFoundException("User not found"))
+
+    @DELETE
+    @Path("/{id}")
+    def deleteUser(@PathParam("id") id: Long): Unit =
+        userService.deleteUser(id)
+
 end UserResource
