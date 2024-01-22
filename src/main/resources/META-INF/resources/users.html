@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Users Management with Scala 3 / Magnum</title>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title">Create new Users</h2>
+        <input type="hidden" id="id" name="id" size=50>
+        <label for="title">Name:</label><br>
+        <input type="text" id="name" name="name" size=50><br><br>
+        <label for="title">Email:</label><br>
+        <input type="text" id="email" name="email" size=50><br><br>
+        <label for="title">Password:</label><br>
+        <input type="text" id="password" name="password" size=50><br><br>
+        <input class="btn btn-info" id="send-user" type="submit" value="Submit">
+        <div class="users-div">
+          <h2>Users</h2>
+          <input class="btn btn-info" id="get-users" type="submit" value="Get Users">
+          <table style="width:100%" class="pf-v5-c-table pf-m-grid-md" role="grid" aria-label="User table"
+            id="table-basic">
+            <Thead class="pf-v5-c-table__thead">
+              <tr class="pf-v5-c-table__tr" role="row">
+                <th style="width:30%" class="pf-v5-c-table__th" role="columnheader" scope="col">ID</th>
+                <th style="width:50%" class="pf-v5-c-table__th" role="columnheader" scope="col">Name</th>
+                <th style="width:20%" class="pf-v5-c-table__th" role="columnheader" scope="col">Email</th>
+                <th style="width:20%" class="pf-v5-c-table__th" role="columnheader" scope="col">Update</th>
+                <th style="width:20%" class="pf-v5-c-table__th" role="columnheader" scope="col">Delete</th>
+              </tr>
+            </Thead>
+            <Tbody class="pf-v5-c-table__tbody" role="rowgroup" id="users"></Tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK" crossorigin="anonymous"></script>
+<script>
+  // Send user to server on click
+  $(document).on("click", "#send-user", function () {
+    var name = $("#name").val();
+    var email = $("#email").val();
+    var password = $("#password").val();
+    fetch("/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        hashedPassword: password,
+      })
+    }).then(res => res.text())
+      .then(text => {
+        console.log(text);
+        get_users();
+      });
+  });
+
+  // Get users from server on click
+  function get_users() {
+    fetch("/users")
+      .then(res => res.json())
+      .then(json => {
+        $("#users").empty();
+        json.forEach(user => {
+          var row = $(`<tr class="pf-v5-c-table__tr" role="row" id='${user.id}'>
+                        <td class="pf-v5-c-table__td" role="cell" data-label="id">${user.id}</td>
+                        <td class="pf-v5-c-table__td" role="cell" data-label="title">${user.name}</td>
+                        <td class="pf-v5-c-table__td" role="cell" data-label="title">${user.email}</td>
+                        <td class="pf-v5-c-table__td" role="cell" data-label="title"><button class="btn btn-info" id="update-user" type="submit" value="Update">Update</button></td>
+                        <td class="pf-v5-c-table__td" role="cell" data-label="title"><button class="btn btn-info" id="delete-user" type="submit" value="Delete">Delete</button></td>
+                      </tr>`);
+          $("#users").append(row);
+          // Clean form
+          $("#name").val("");
+          $("#email").val("");
+          $("#password").val("");
+        });
+      });
+  }
+  $("#get-users").click((event) => {
+    get_users();
+  });
+
+  // Delete user on click
+  $(document).on("click", "#delete-user", function () {
+    if (confirm("Are you sure you want to delete this user?")) {
+      var id = $(this).closest("tr").attr("id");
+      console.log("Deleting user with id: " + id);
+      fetch("/users/" + id, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      }).then(res => res.text())
+        .then(text => {
+          get_users();
+        });
+    }
+  });
+
+  // Update user on click using the same form as create
+  $(document).on("click", "#update-user", function () {
+    var id = $(this).closest("tr").attr("id");
+    var name = $(this).closest("tr").find("td:eq(1)").text();
+    var email = $(this).closest("tr").find("td:eq(2)").text();
+    $("#id").val(id);
+    $("#name").val(name);
+    $("#email").val(email);
+    $("#password").val("");
+    // // Replace submit button with update button
+    $("#send-user").replaceWith(`<input class="btn btn-info" id="submit-update-user" type="submit" value="Update">`);
+    // Add a cancel button
+    $("#submit-update-user").after(`<input class="btn btn-info" id="cancel-update-user" type="submit" value="Cancel">`);
+  });
+
+  // Cancel update on click
+  $(document).on("click", "#cancel-update-user", function () {
+    // Replace update button with submit button and clean form
+    $("#submit-update-user").replaceWith(`<input class="btn btn-info" id="send-user" type="submit" value="Submit">`);
+    $("#id").val("");
+    $("#name").val("");
+    $("#email").val("");
+    $("#password").val("");
+    // Remove cancel button
+    $("#cancel-update-user").remove();
+  });
+
+  // Submit form as PUT instead of POST to update user
+  $(document).on("click", "#submit-update-user", function () {
+    if (confirm("Are you sure you want to update this user?")) {
+      var id = $("#id").val();
+      var name = $("#name").val();
+      var email = $("#email").val();
+      var password = $("#password").val();
+      fetch("/users/" + id, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          hashedPassword: password,
+        })
+      }).then(res => res.text())
+        .then(text => {
+          console.log(text);
+          get_users();
+        });
+      // Replace update button with submit button and clean form. Remove cancel button
+      $("#submit-update-user").replaceWith(`<input class="btn btn-info" id="send-user" type="submit" value="Submit">`);
+      $("#cancel-update-user").remove();
+
+      $("#id").val("");
+      $("#name").val("");
+      $("#email").val("");
+      $("#password").val("");
+    }
+  });
+
+  // Get all users on page load
+  get_users();
+
+</script>
+
+</html>
