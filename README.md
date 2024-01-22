@@ -37,24 +37,37 @@ Run your application in dev mode that enables live coding using:
 quarkus dev
 ```
 
-Then open <http://localhost:8080> that shows Quarkus static demo page and the endpoints <http://localhost:8080/hello> or <http://localhost:8080/greet?name=Yourname> which are written in Scala provided by the [GreetingResource.scala](./src/main/scala/org/acme/GreetingResource.scala) source file.
-
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+> On dev mode and production mode, the Swagger UI can be opened at <http://localhost:8080/swagger-ui>.
 
-The sample repository also provides a sample Apache Kafka app containing a Producer, a Consumer and a Processor.
+This sample project contains multiple small "applications" that uses different libraries to show it's usage.
+
+Open <http://localhost:8080> that shows Quarkus static demo page. It shows the endpoints that are exposed.
+
+### Simple greet app
+
+The endpoints <http://localhost:8080/hello> or <http://localhost:8080/greet?name=Yourname> are written in Scala provided by the [GreetingResource.scala](./src/main/scala/org/acme/GreetingResource.scala) source file. Based on input, it returns a text text.
+
+### Kafka Producer -> Processor -> Consumer
+
+This sample app uses Kafka as a messaging middleware passing data between a Producer, a Consumer and a Processor. There is an HTML interface at <http://localhost:8080/articles.html> to interact with the application. The built-in Kafka UI can be seen at <http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics>.
 
 ![article submission sample](./docs/articles.png)
 
-This sample uses Kafka as a messaging middleware passing the data between each component and showing an HTML interface at <http://localhost:8080/articles.html>. The built-in Kafka UI can be seen at <http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics>.
+### Database Persistence
 
 The persistence examples include JPA with Hibernate ORM, and the new kid on the Scala 3 block, [Magnum](https://github.com/AugustNagro/magnum).
 Following the Magnum example you can easily also integrate Anorm, Slick or Doobie. Doobie is a bit more complex as you will have to bridge Cats Effect IO to CompletionStage/CompletableFuture. If you feel adventurous you can try bridging with SmallRye Mutiny Uni, which is lazy by default and more close in behaviour to Cats Effect IO.
 
 The sample using Scala 3 Magnum lib lives under <http://localhost:8080/users.html>. Data is stored into Quarkus dev Postgres database that is started in dev mode.
 
+![users](./docs/users.png)
+
 The hibernate example is really un-Scala like, but it's there for reference. Some other Quarkus integrations might expect JPA to be present so there it is.
 
 If running the application standalone (for example with native binary), start the Docker-compose stack with `docker-compose up -d` so all requirements are run like Kafka, Kafka-UI for management, Postgres and PGAdmin. Also user and database are created automatically.
+
+## Running Tests
 
 To run tests, use:
 
@@ -101,6 +114,16 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
 
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+
+## UI for tools
+
+The following URLs can be used to manage the deployed tools by Quarkus or Docker-Compose stack (when used):
+
+- App Homepage - <http://localhost:8080/>
+- Swagger UI - <http://localhost:8080/swagger-ui>
+- Quarkus Dev UI (only in dev mode) - <http://localhost:8080/q/dev-ui>
+- Kafka UI - <http://localhost:9021>
+- PGadmin (Postgres admin interface) - <http://localhost:8088>
 
 ## Provided Code
 
