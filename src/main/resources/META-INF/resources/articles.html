@@ -23,16 +23,15 @@
         <input class="btn btn-info" id="send-article" type="submit" value="Submit">
         <div class="articles-div">
           <h2>Articles</h2>
-          <table style="width:100%" class="pf-v5-c-table pf-m-grid-md" role="grid"
-            aria-label="This is a simple table example" id="table-basic">
-            <Thead class="pf-v5-c-table__thead">
-              <tr class="pf-v5-c-table__tr" role="row">
-                <th style="width:30%" class="pf-v5-c-table__th" role="columnheader" scope="col">Article ID</th>
-                <th style="width:50%" class="pf-v5-c-table__th" role="columnheader" scope="col">Article Title</th>
-                <th style="width:20%" class="pf-v5-c-table__th" role="columnheader" scope="col">Processing Status</th>
+          <table class="table table-striped table-bordered table-hover" id="table1">
+            <thead>
+              <tr>
+                <th>Article ID</th>
+                <th>Article Title</th>
+                <th>Processing Status</th>
               </tr>
-            </Thead>
-            <Tbody class="pf-v5-c-table__tbody" role="rowgroup" id="articles"></Tbody>
+            </thead>
+            <tbody id="articles"></tbody>
           </table>
         </div>
       </div>
@@ -66,10 +65,10 @@
         title: article_title
       })
     }).then(res => res.text())
-    var row = $(`<tr class="pf-v5-c-table__tr" role="row" id='${article_id}'>
-                  <td class="pf-v5-c-table__td" role="cell" data-label="id">${article_id}</td>
-                  <td class="pf-v5-c-table__td" role="cell" data-label="title">${article_title}</td>
-                  <td class="pf-v5-c-table__td article_id" role="cell" data-label="status">✳️ Pending processing...</td>
+    var row = $(`<tr id='${article_id}'>
+                  <td data-label="id">${article_id}</td>
+                  <td data-label="title">${article_title}</td>
+                  <td class="article_id" data-label="status">✳️ Pending processing...</td>
                 </tr>`);
     $("#articles").append(row);
 
@@ -85,10 +84,10 @@
     // Update the article ID row with the new status and article name
     if (json.status == "Processed") {
       $(`#${json.id}`).find(".article_id").text("✅ Processed");
-      $(`#${json.id}`).find(".pf-v5-c-table__td").css("color", "green");
+      $(`#${json.id}`).find(".article_id").css("color", "green");
     } else {
       $(`#${json.id}`).find(".article_id").text("❎ Failed to process");
-      $(`#${json.id}`).find(".pf-v5-c-table__td").css("color", "red");
+      $(`#${json.id}`).find(".article_id").css("color", "red");
     }
   };
 </script>

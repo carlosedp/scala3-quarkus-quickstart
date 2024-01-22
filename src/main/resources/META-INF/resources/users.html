@@ -24,21 +24,23 @@
         <label for="title">Password:</label><br>
         <input type="text" id="password" name="password" size=50><br><br>
         <input class="btn btn-info" id="send-user" type="submit" value="Submit">
+        <br>
+        <hr>
+        <br>
         <div class="users-div">
           <h2>Users</h2>
           <input class="btn btn-info" id="get-users" type="submit" value="Get Users">
-          <table style="width:100%" class="pf-v5-c-table pf-m-grid-md" role="grid" aria-label="User table"
-            id="table-basic">
-            <Thead class="pf-v5-c-table__thead">
-              <tr class="pf-v5-c-table__tr" role="row">
-                <th style="width:30%" class="pf-v5-c-table__th" role="columnheader" scope="col">ID</th>
-                <th style="width:50%" class="pf-v5-c-table__th" role="columnheader" scope="col">Name</th>
-                <th style="width:20%" class="pf-v5-c-table__th" role="columnheader" scope="col">Email</th>
-                <th style="width:20%" class="pf-v5-c-table__th" role="columnheader" scope="col">Update</th>
-                <th style="width:20%" class="pf-v5-c-table__th" role="columnheader" scope="col">Delete</th>
+          <br><br>
+          <table class="table table-striped table-bordered table-hover" id="table1">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th colspan="2">Actions</th>
               </tr>
-            </Thead>
-            <Tbody class="pf-v5-c-table__tbody" role="rowgroup" id="users"></Tbody>
+            </thead>
+            <tbody id="users"></tbody>
           </table>
         </div>
       </div>
@@ -77,12 +79,14 @@
       .then(json => {
         $("#users").empty();
         json.forEach(user => {
-          var row = $(`<tr class="pf-v5-c-table__tr" role="row" id='${user.id}'>
-                        <td class="pf-v5-c-table__td" role="cell" data-label="id">${user.id}</td>
-                        <td class="pf-v5-c-table__td" role="cell" data-label="title">${user.name}</td>
-                        <td class="pf-v5-c-table__td" role="cell" data-label="title">${user.email}</td>
-                        <td class="pf-v5-c-table__td" role="cell" data-label="title"><button class="btn btn-info" id="update-user" type="submit" value="Update">Update</button></td>
-                        <td class="pf-v5-c-table__td" role="cell" data-label="title"><button class="btn btn-info" id="delete-user" type="submit" value="Delete">Delete</button></td>
+          var row = $(`<tr id='${user.id}'>
+                        <td data-label="id">${user.id}</td>
+                        <td data-label="title">${user.name}</td>
+                        <td data-label="title">${user.email}</td>
+                        <td data-label="title">
+                          <button class="btn btn-default" id="update-user" type="submit" value="Update">Update</button>
+                          <button class="btn btn-default" id="delete-user" type="submit" value="Delete">Delete</button>
+                        </td>
                       </tr>`);
           $("#users").append(row);
           // Clean form
@@ -92,7 +96,7 @@
         });
       });
   }
-  $("#get-users").click((event) => {
+  $(document).on("click", "#get-users", function () {
     get_users();
   });
 
