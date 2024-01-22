@@ -1,10 +1,9 @@
 package org.acme.persistence.magnum
 
-import io.quarkus.qute.{CheckedTemplate, Template, TemplateInstance}
+import io.quarkus.qute.{Template, TemplateInstance}
 import io.smallrye.common.annotation.Blocking
 import jakarta.ws.rs.*
 
-import scala.annotation.static
 import scala.jdk.CollectionConverters.*
 
 @Path("/users")
