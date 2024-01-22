@@ -50,7 +50,11 @@ This sample uses Kafka as a messaging middleware passing the data between each c
 The persistence examples include JPA with Hibernate ORM, and the new kid on the Scala 3 block, [Magnum](https://github.com/AugustNagro/magnum).
 Following the Magnum example you can easily also integrate Anorm, Slick or Doobie. Doobie is a bit more complex as you will have to bridge Cats Effect IO to CompletionStage/CompletableFuture. If you feel adventurous you can try bridging with SmallRye Mutiny Uni, which is lazy by default and more close in behaviour to Cats Effect IO.
 
+The sample using Scala 3 Magnum lib lives under <http://localhost:8080/users.html>. Data is stored into Quarkus dev Postgres database that is started in dev mode.
+
 The hibernate example is really un-Scala like, but it's there for reference. Some other Quarkus integrations might expect JPA to be present so there it is.
+
+If running the application standalone (for example with native binary), start the Docker-compose stack with `docker-compose up -d` so all requirements are run like Kafka, Kafka-UI for management, Postgres and PGAdmin. Also user and database are created automatically.
 
 To run tests, use:
 

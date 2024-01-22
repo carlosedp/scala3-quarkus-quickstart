@@ -1,10 +1,11 @@
 # This docker-compose file is used to run a local Kafka cluster with Zookeeper and Kafka UI
 # Run with docker-compose up -d
 
-version: "2"
+version: "3"
+
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.5.3
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -12,7 +13,7 @@ services:
       - 22181:2181
 
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:7.5.3
     depends_on:
       - zookeeper
     ports:
@@ -27,7 +28,7 @@ services:
 
   kafka-ui:
     container_name: kafka-ui
-    image: provectuslabs/kafka-ui:latest
+    image: provectuslabs/kafka-ui:v0.7.1
     ports:
       - 9021:8080
     depends_on:
@@ -36,3 +37,30 @@ services:
       DYNAMIC_CONFIG_ENABLED: true
       KAFKA_CLUSTERS_0_NAME: ComposeCluster
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
+    volumes:
+      - ./configs/kui/dynamic_config.yaml:/etc/kafkaui/dynamic_config.yaml
+
+  postgresql:
+    container_name: postgresql
+    image: postgres:14
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./configs/postgresql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:8.2
+    ports:
+      - 8088:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_SERVER_JSON_FILE: /etc/pgadmin4/servers.json
+    volumes:
+      - ./configs/pgadmin4/servers.json:/etc/pgadmin4/servers.json
+    depends_on:
+      - postgresql
