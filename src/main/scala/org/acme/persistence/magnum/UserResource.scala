@@ -15,8 +15,8 @@ class UserResource(private val userService: UserService):
 
     @PUT
     @Path("/{id}")
-    @Consumes(Array("application/json"))
-    @Produces(Array("application/json"))
+    @Consumes(Array(core.MediaType.APPLICATION_JSON))
+    @Produces(Array(core.MediaType.APPLICATION_JSON))
     def updateUser(@PathParam("id") id: Long, user: UserCreateUpdateCommand): User =
         userService
             .updateUser(id, user)
@@ -24,6 +24,7 @@ class UserResource(private val userService: UserService):
 
     @DELETE
     @Path("/{id}")
+    @Consumes(Array(core.MediaType.APPLICATION_JSON))
     def deleteUser(@PathParam("id") id: Long): Unit =
         userService.deleteUser(id)
 
