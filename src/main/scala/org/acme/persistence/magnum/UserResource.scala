@@ -8,8 +8,8 @@ import scala.jdk.CollectionConverters.*
 
 @Path("/users")
 class UserResource(
-    private val userPage: Template,
-    private val userService: UserService
+    private val userPage:    Template,
+    private val userService: UserService,
   ):
 
     @POST

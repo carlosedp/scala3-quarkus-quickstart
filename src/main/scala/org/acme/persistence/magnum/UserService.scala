@@ -11,7 +11,6 @@ class UserService(private val userRepo: UserRepository, private val ds: AgroalDa
     // This should integrate better with the rest of the ecosystem,
     // for example in tests.
 
-
     @Transactional
     def create(user: UserCreateUpdateCommand): User =
         connect(ds):
@@ -21,12 +20,12 @@ class UserService(private val userRepo: UserRepository, private val ds: AgroalDa
     def getAll: Vector[User] =
         connect(ds):
             userRepo.findAll
-    
+
     @Transactional
     def getById(id: Long): Option[User] =
         connect(ds):
             userRepo.findById(id)
-    
+
     @Transactional
     def updateUser(id: Long, user: UserCreateUpdateCommand): Option[User] =
         connect(ds):
