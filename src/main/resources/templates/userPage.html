@@ -1,32 +1,147 @@
 {@org.acme.persistence.magnum.UserPageData page}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{page.title}</title>
     <script src="https://unpkg.com/htmx.org@1.6.1"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
 </head>
+
 <body hx-boost="true">
-<div class="container">
-    <h1 class="card-title">User List</h1>
-    {#for user in page.users}
-        <p class="card-body">{user.name} - {user.email}</p>
-    {/for}
-    <hr>
-    <h2 class="card-title">Add New User</h2>
-    <form action="/users/users-page" method="post" class="card">
-        <div class="card-body">
-            <label for="name">Name:</label><br>
-            <input type="text" id="name" name="name" class="form-control"><br>
-            <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email" class="form-control"><br>
-            <label for="password">Password:</label><br>
-            <input type="password" id="password" name="password" class="form-control"><br>
-            <input type="submit" value="Submit" class="btn btn-primary">
-        </div>
-    </form>
-</div>
+    <div class="container">
+
+        <h2 class="card-title">Add New User</h2>
+        <form action="/users/users-page" method="post" class="card">
+            <div class="card-body">
+                <input type="hidden" id="id" name="id" size=50>
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" class="form-control"><br>
+                <label for="email">Email:</label><br>
+                <input type="text" id="email" name="email" class="form-control"><br>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" class="form-control"><br>
+                <input type="submit" id="send-user" value="Submit" class="btn btn-primary">
+            </div>
+        </form>
+        <hr>
+        <h1 class="card-title">User List</h1>
+        <table class="table table-striped table-bordered table-hover" id="table1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            {#for user in page.users}
+            <tr id={user.id}>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>
+                    <button class="btn btn-default" id="update-user" type="submit">Update</button>
+                    <button class="btn btn-default" id="delete-user" type="submit">Delete</button>
+                </td>
+            </tr>
+            {/for}
+
+        </table>
+    </div>
+
+
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+    crossorigin="anonymous"></script>
+
+<script>
+    // TODO: Replace all this jquery code with htmx
+    // Delete user on click
+    $(document).on("click", "#delete-user", function () {
+        if (confirm("Are you sure you want to delete this user?")) {
+            var id = $(this).closest("tr").attr("id");
+            console.log("Deleting user with id: " + id);
+            fetch("/users/" + id, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }).then(res => res.text())
+                .then(text => {
+                    get_users();
+                });
+        }
+    });
+
+    // Update user on click using the same form as create
+    $(document).on("click", "#update-user", function () {
+        var id = $(this).closest("tr").attr("id");
+        var name = $(this).closest("tr").find("td:eq(1)").text();
+        var email = $(this).closest("tr").find("td:eq(2)").text();
+        console.log("Updating user with id: " + id);
+        $("#id").val(id);
+        $("#name").val(name);
+        $("#email").val(email);
+        $("#password").val("");
+        // // Replace submit button with update button
+        $("#send-user").replaceWith(`<input class="btn btn-info" id="submit-update-user" type="submit" value="Update">`);
+        // Add a cancel button
+        $("#submit-update-user").after(`<input class="btn btn-info" id="cancel-update-user" type="submit" value="Cancel">`);
+    });
+
+    // Cancel update on click
+    $(document).on("click", "#cancel-update-user", function () {
+        // Replace update button with submit button and clean form
+        $("#submit-update-user").replaceWith(`<input class="btn btn-info" id="send-user" type="submit" value="Submit">`);
+        $("#id").val("");
+        $("#name").val("");
+        $("#email").val("");
+        $("#password").val("");
+        // Remove cancel button
+        $("#cancel-update-user").remove();
+    });
+
+
+    // Submit form as PUT instead of POST to update user
+    $(document).on("click", "#submit-update-user", function () {
+        if (confirm("Are you sure you want to update this user?")) {
+            var id = $("#id").val();
+            var name = $("#name").val();
+            var email = $("#email").val();
+            var password = $("#password").val();
+            fetch("/users/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    hashedPassword: password,
+                })
+            }).then(res => res.text())
+                .then(text => {
+                    console.log(text);
+                    get_users();
+                });
+            // Replace update button with submit button and clean form. Remove cancel button
+            $("#submit-update-user").replaceWith(`<input class="btn btn-info" id="send-user" type="submit" value="Submit">`);
+            $("#cancel-update-user").remove();
+
+            $("#id").val("");
+            $("#name").val("");
+            $("#email").val("");
+            $("#password").val("");
+        }
+    });
+
+</script>
+
 </html>
