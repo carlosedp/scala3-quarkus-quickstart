@@ -7,18 +7,25 @@ import jakarta.transaction.Transactional
 
 @ApplicationScoped
 class UserService(private val userRepo: UserRepository, private val ds: AgroalDataSource):
-
-    def create(user: UserCreateUpdateCommand): User =
-        transact(ds):
-            userRepo.insertReturning(user)
-
-    def getAll: Vector[User] =
-        transact(ds):
-            userRepo.findAll
-
     // Use Quarkus' @Transactional instead of Magnum's transact(ds).
     // This should integrate better with the rest of the ecosystem,
     // for example in tests.
+
+    @Transactional
+    def create(user: UserCreateUpdateCommand): User =
+        connect(ds):
+            userRepo.insertReturning(user)
+
+    @Transactional
+    def getAll: Vector[User] =
+        connect(ds):
+            userRepo.findAll
+
+    @Transactional
+    def getById(id: Long): Option[User] =
+        connect(ds):
+            userRepo.findById(id)
+
     @Transactional
     def updateUser(id: Long, user: UserCreateUpdateCommand): Option[User] =
         connect(ds):

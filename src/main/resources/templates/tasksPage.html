@@ -1,0 +1,32 @@
+{@org.acme.persistence.hibernate.TaskPageData page}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{page.title}</title>
+    <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css">
+</head>
+<body hx-boost="true">
+<div class="container">
+    <h1 class="card-title">Task List</h1>
+    <div id="taskList" class="card">
+        {#for task in page.tasks}
+            <p class="card-body">{task.title} - {task.description} - {task.done}</p>
+        {/for}
+    </div>
+    <hr>
+    <h2 class="card-title">Add New Task</h2>
+    <form action="/tasks/tasks-page" method="post" class="card">
+        <div class="card-body">
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" class="form-control"><br>
+            <label for="description">Description:</label><br>
+            <input type="text" id="description" name="description" class="form-control"><br>
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+</body>
+</html>
