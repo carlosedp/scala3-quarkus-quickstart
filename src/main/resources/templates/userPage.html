@@ -78,6 +78,9 @@
                     get_users();
                 });
         }
+        // Trigger reload
+        $("#table1").load(location.href + " #table1");
+
     });
 
     // Update user on click using the same form as create
@@ -139,6 +142,8 @@
             $("#name").val("");
             $("#email").val("");
             $("#password").val("");
+            // Trigger reload
+            $("#table1").load(location.href + " #table1");
         }
     });
 

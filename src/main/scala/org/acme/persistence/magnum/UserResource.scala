@@ -4,8 +4,6 @@ import io.quarkus.qute.{Template, TemplateInstance}
 import io.smallrye.common.annotation.Blocking
 import jakarta.ws.rs.*
 
-import scala.jdk.CollectionConverters.*
-
 @Path("/users")
 class UserResource(
     private val userPage:    Template,
@@ -38,13 +36,12 @@ class UserResource(
     def deleteUser(@PathParam("id") id: Long): Unit =
         userService.deleteUser(id)
 
-
     @GET
     @Path("/users-page")
     @Produces(Array(core.MediaType.TEXT_HTML))
     @Blocking
     def getUsersPage: TemplateInstance =
-        userPage.data("page", UserPageData("Users", userService.getAll.asJava))
+        userPage.data("page", UserPageData("Users", userService.getAll.toArray))
 
     @POST
     @Path("/users-page")
@@ -58,6 +55,6 @@ class UserResource(
       ): TemplateInstance =
         userService.create(UserCreateUpdateCommand(name, email, password))
 
-        userPage.data("page", UserPageData("Users", userService.getAll.asJava))
+        userPage.data("page", UserPageData("Users", userService.getAll.toArray))
 
 end UserResource

@@ -4,8 +4,6 @@ import io.quarkus.qute.{Template, TemplateInstance}
 import io.smallrye.common.annotation.Blocking
 import jakarta.ws.rs.*
 
-import scala.jdk.CollectionConverters.*
-
 @Path("/tasks")
 class TaskResource(
     private val tasksPage:   Template,
@@ -15,7 +13,7 @@ class TaskResource(
     @GET
     @Produces(Array(core.MediaType.APPLICATION_JSON))
     def getAll: List[TaskViewModel] =
-        taskService.getAll.asScala.map(TaskViewModel(_)).toList
+        taskService.getAll.map(TaskViewModel(_)).toList
 
     @POST
     @Consumes(Array(core.MediaType.APPLICATION_JSON))

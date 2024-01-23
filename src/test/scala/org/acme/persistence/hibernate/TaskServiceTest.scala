@@ -4,8 +4,6 @@ import io.quarkus.test.TestTransaction
 import io.quarkus.test.junit.QuarkusTest
 import org.junit.jupiter.api.{Assertions, Test}
 
-import scala.jdk.CollectionConverters.*
-
 @QuarkusTest
 class TaskServiceTest(private val taskService: TaskService):
 
@@ -15,7 +13,7 @@ class TaskServiceTest(private val taskService: TaskService):
     def testCreateTaskIsolated1(): Unit =
         val task: Task = makeTestTask
         taskService.create(task)
-        val tasks = taskService.getAll.asScala
+        val tasks = taskService.getAll
         Assertions.assertTrue(tasks.length == 1)
 
     @Test
@@ -23,7 +21,7 @@ class TaskServiceTest(private val taskService: TaskService):
     def testCreateTaskIsolated2(): Unit =
         val task: Task = makeTestTask
         taskService.create(task)
-        val tasks = taskService.getAll.asScala
+        val tasks = taskService.getAll
         Assertions.assertTrue(tasks.length == 1)
 
     private def makeTestTask =

@@ -12,5 +12,6 @@
     "kafka.*",
     "mp.*",
     "quarkus.datasource.*",
-  ]
+  ],
+  "qute.validation.enabled": false,
 }
