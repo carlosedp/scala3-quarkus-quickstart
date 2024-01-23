@@ -37,7 +37,17 @@ class UserServiceTest(private val userService: UserService):
     @Test
     @TestTransaction
     def userUpdateTest(): Unit =
-        val user = userService.create(makeTestUser)
+        val user        = userService.create(makeTestUser)
         val updatedUser = userService.updateUser(user.id, makeTestUser.copy(name = "updated"))
 
         Assertions.assertTrue(updatedUser.exists(_.name == "updated"))
+
+    @Test
+    @TestTransaction
+    def userDeleteTest(): Unit =
+        val user = userService.create(makeTestUser)
+        userService.deleteUser(user.id)
+
+        Assertions.assertTrue(userService.getAll.isEmpty)
+
+end UserServiceTest
