@@ -75,7 +75,7 @@
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-scala_3</artifactId>
-      <version>2.15.0</version>
+      <version>2.16.1</version>
     </dependency>
     <!-- ######## Quarkus Kafka #### -->
     <dependency>
