@@ -11,12 +11,23 @@ class GreetingResourceTest:
     // Endpoint test helper
     def testEndpoint(url: String, result: String) =
         Given()
-            .When(
-                _.get(url)
+            .When(req =>
+                req.get(url)
             ).Then(res =>
                 res.statusCode(200)
                 res.body(is(result))
             )
+
+    @Test
+    def testJSONEndpoint =
+        val data: String = Given()
+            .When(req =>
+                req.get("/greet/json")
+            ).Then(res =>
+                res.statusCode(200)
+                res.body("message", is("Hello world from RESTEasy Reactive in Scala 3"))
+            ).Extract(_.path("message"))
+        assert(data == "Hello world from RESTEasy Reactive in Scala 3")
 
     @Test
     def testHelloEndpoint() =
