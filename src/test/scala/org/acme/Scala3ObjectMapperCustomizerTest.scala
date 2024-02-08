@@ -27,7 +27,7 @@ class Scala3ObjectMapperCustomizerTest:
     var objectMapper: ObjectMapper = null
 
     @Test
-    def parseJsonToScalaObject =
+    def parseJsonToScalaObject: Unit =
         val sampleSomethingJSON = """
                                     |{
                                     |"name": "My Something",
@@ -44,7 +44,7 @@ class Scala3ObjectMapperCustomizerTest:
         assertEquals(parsed.other.foo, "bar")
 
     @Test
-    def generateJsonFromScalaObject =
+    def generateJsonFromScalaObject: Unit =
         val something = Something("My Something", AnEnum.A, Other("bar"))
         val json      = objectMapper.writeValueAsString(something)
         assertEquals(json, """{"name":"My Something","someEnum":"A","other":{"foo":"bar"}}""")

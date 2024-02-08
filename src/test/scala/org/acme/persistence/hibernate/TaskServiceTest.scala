@@ -10,7 +10,7 @@ class TaskServiceTest(private val taskService: TaskService):
     // The following tests show that they are isolated when we use the @TestTransaction annotation
     @Test
     @TestTransaction
-    def testCreateTaskIsolated1(): Unit =
+    def testCreateTaskIsolated1: Unit =
         val task: Task = makeTestTask
         taskService.create(task)
         val tasks = taskService.getAll
@@ -18,7 +18,7 @@ class TaskServiceTest(private val taskService: TaskService):
 
     @Test
     @TestTransaction
-    def testCreateTaskIsolated2(): Unit =
+    def testCreateTaskIsolated2: Unit =
         val task: Task = makeTestTask
         taskService.create(task)
         val tasks = taskService.getAll

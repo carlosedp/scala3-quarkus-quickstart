@@ -19,7 +19,7 @@ class GreetingResourceTest:
             )
 
     @Test
-    def testJSONEndpoint =
+    def testJSONEndpoint: Unit =
         val data: String = Given()
             .When(req =>
                 req.get("/greet/json")
@@ -30,23 +30,23 @@ class GreetingResourceTest:
         assert(data == "Hello world from RESTEasy Reactive in Scala 3")
 
     @Test
-    def testHelloEndpoint() =
+    def testHelloEndpoint: Unit =
         testEndpoint("/hello", "Hello from RESTEasy Reactive in Scala 3")
 
     @Test
-    def testGreetEndpointWithNoParam() =
+    def testGreetEndpointWithNoParam: Unit =
         testEndpoint("/greet", "Hello world from RESTEasy Reactive in Scala 3")
 
     @Test
-    def testGreetEndpointWithEmptyParam() =
+    def testGreetEndpointWithEmptyParam: Unit =
         testEndpoint("/greet?name=", "Hello  from RESTEasy Reactive in Scala 3")
 
     @Test
-    def testGreetEndpointWithSingleParam() =
+    def testGreetEndpointWithSingleParam: Unit =
         testEndpoint("/greet?name=quarkus", "Hello quarkus from RESTEasy Reactive in Scala 3")
 
     @Test
-    def testGreetEndpointWithMultipleParam() =
+    def testGreetEndpointWithMultipleParam: Unit =
         testEndpoint(
             "/greet?name=quarkus&name=scala3",
             "Hello quarkus and scala3 from RESTEasy Reactive in Scala 3",
