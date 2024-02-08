@@ -1,12 +1,12 @@
 package helper
 
-import scala.util.chaining.*
 import scala.reflect.ClassTag
+import scala.util.chaining.*
+
 import io.restassured.RestAssured.`given`
-import io.restassured.RestAssured.`when`
+import io.restassured.internal.{ResponseSpecificationImpl, ValidatableResponseImpl}
 import io.restassured.response.{ExtractableResponse, Response, ValidatableResponse}
-import io.restassured.specification.{RequestSender, RequestSpecification}
-import io.restassured.internal.{ValidatableResponseImpl, ResponseSpecificationImpl}
+import io.restassured.specification.RequestSpecification
 
 // Main wrappers
 
@@ -151,4 +151,6 @@ extension [T](resp: ValidatableResponse)
 
 private def doIfValidatableResponseImpl(fn: ResponseSpecificationImpl => Unit): ValidatableResponse => Unit =
     resp =>
-        if resp.isInstanceOf[ValidatableResponseImpl] then fn(resp.asInstanceOf[ValidatableResponseImpl].responseSpec)
+        resp match
+            case resp: ValidatableResponseImpl => fn(resp.responseSpec)
+            case _ => ()
