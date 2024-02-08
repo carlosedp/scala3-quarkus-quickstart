@@ -1,7 +1,7 @@
 package org.acme.kafka
 
-import com.fasterxml.jackson.databind.ObjectMapper
 import helper.*
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.quarkus.test.common.QuarkusTestResource
 import io.quarkus.test.junit.QuarkusTest
 import io.smallrye.reactive.messaging.memory.InMemoryConnector
@@ -57,8 +57,18 @@ class ArticleProducerConsumerTest(@Connector("smallrye-in-memory") connector: In
 
     @Test
     def testPostedArticleToKafka() =
-        // Check if previous test posted the article to Kafka
-        val article  = Article("1", "Test article")
+        // Create a new article
+        val article     = Article("1", "Test article")
+        val articleJson = objectMapper.writeValueAsString(article)
+
+        Given()
+            .When(
+                _.body(articleJson).contentType(MediaType.APPLICATION_JSON).post("/article")
+            ).Then(res =>
+                res.statusCode(200)
+                res.body(is(article.id))
+            )
+
         val articles = connector.sink[Article]("articles")
         await().until(() => articles.received().size() == 1)
         val receivedArticle = articles.received().get(0).getPayload()
