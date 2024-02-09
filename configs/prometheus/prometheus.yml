@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "prometheus"
+
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # Job for scraping Antidote
+  - job_name: "quarkus-app"
+
+    # locally reachable address if prometheus is in host network
+    # docker container names if prometheus is in the same docker network as the targets
+    static_configs:
+      - targets: ["host.docker.internal:8080"]

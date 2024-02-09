@@ -64,3 +64,13 @@ services:
       - ./configs/pgadmin4/servers.json:/etc/pgadmin4/servers.json
     depends_on:
       - postgresql
+
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:v2.49.1
+    ports:
+      - 9090:9090
+    volumes:
+      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"

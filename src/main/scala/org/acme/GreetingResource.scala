@@ -4,6 +4,7 @@ import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType.*
 import org.eclipse.microprofile.config.ConfigProvider
 import org.eclipse.microprofile.config.inject.ConfigProperty
+import org.eclipse.microprofile.metrics.annotation.Counted
 import org.jboss.resteasy.reactive.RestQuery
 
 @Path("/")
@@ -13,6 +14,7 @@ class GreetingResource(
   ):
     @GET
     @Path("/hello")
+    @Counted(name = "helloCounter", description = "How many times the hello endpoint was invoked")
     @Produces(Array(TEXT_PLAIN))
     def hello() =
         // Or programatically access the configuration property greeting.suffix
