@@ -27,6 +27,17 @@ To start developing in Quarkus/Scala 3, I recommend the following:
 
 The repository also comes with a [Github Action](https://github.com/carlosedp/scala3-quarkus-quickstart/actions/workflows/CI.yaml) that runs tests on PRs and pushes.
 
+This repository demonstrates multiple Quarkus concepts, as:
+
+- Application [Config](https://quarkus.io/guides/config) as in [GreetingResource.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/main/scala/org/acme/GreetingResource.scala)
+- Apache [Kafka](https://quarkus.io/guides/kafka) as in [ArticleProducerConsumer.scala/ArticleProcessor.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/main/scala/org/acme/kafka)
+- Database Persistence using [Scala Magnum](https://github.com/AugustNagro/magnum) as in [persistence/magnum](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/main/scala/org/acme/persistence/magnum)
+- Database Persistence using [Hibernate](https://quarkus.io/guides/hibernate-orm) as in [persistence/hibernate](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/main/scala/org/acme/persistence/hibernate)
+- Using Serialization with support for Scala types and Enums as in [Scala3ObjectMapperCustomizerTest.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/test/scala/org/acme/Scala3ObjectMapperCustomizerTest.scala)
+- Using [Qute templates](https://quarkus.io/guides/qu$$te) as in [UserResource.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/main/scala/org/acme/persistence/magnum/UserResource.scala)
+- Use of [rest-assured](https://github.com/rest-assured/rest-assured) with a [Scala 3 wrapper](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/test/scala/helper/RestAssuredHelper.scala) for testing REST as in [RestAssuredHelperTest.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/test/scala/helper/RestAssuredHelperTest.scala)
+- Application [startup and shutdown](https://quarkus.io/guides/lifecycle) as in [Main.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/main/scala/org/acme/Main.scala)
+
 ## Running the application in dev mode
 
 Run your application in dev mode that enables live coding using:
