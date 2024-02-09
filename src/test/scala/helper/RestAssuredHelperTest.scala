@@ -5,8 +5,7 @@ import io.restassured.builder.ResponseBuilder
 import io.restassured.filter.Filter
 import io.restassured.http.ContentType.JSON
 import org.hamcrest.Matchers.*
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.{BeforeEach, Test}
 
 class RestAssuredScalaExtensionsTest:
 

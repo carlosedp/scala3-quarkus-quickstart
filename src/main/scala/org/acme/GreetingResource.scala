@@ -2,9 +2,9 @@ package org.acme
 
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType.*
-import org.jboss.resteasy.reactive.RestQuery
-import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.eclipse.microprofile.config.ConfigProvider
+import org.eclipse.microprofile.config.inject.ConfigProperty
+import org.jboss.resteasy.reactive.RestQuery
 
 @Path("/")
 class GreetingResource(

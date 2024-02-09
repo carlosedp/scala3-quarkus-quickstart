@@ -1,7 +1,7 @@
 package org.acme.kafka
 
-import helper.*
 import com.fasterxml.jackson.databind.ObjectMapper
+import helper.*
 import io.quarkus.test.common.QuarkusTestResource
 import io.quarkus.test.junit.QuarkusTest
 import io.smallrye.reactive.messaging.memory.InMemoryConnector
