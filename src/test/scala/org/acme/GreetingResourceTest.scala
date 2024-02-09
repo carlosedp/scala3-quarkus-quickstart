@@ -31,7 +31,7 @@ class GreetingResourceTest:
 
     @Test
     def testHelloEndpoint: Unit =
-        testEndpoint("/hello", "Hello from RESTEasy Reactive in Scala 3")
+        testEndpoint("/hello", "Hello World from RESTEasy Reactive in Scala 3!")
 
     @Test
     def testGreetEndpointWithNoParam: Unit =

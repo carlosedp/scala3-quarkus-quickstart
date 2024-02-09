@@ -3,13 +3,21 @@ package org.acme
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType.*
 import org.jboss.resteasy.reactive.RestQuery
+import org.eclipse.microprofile.config.inject.ConfigProperty
+import org.eclipse.microprofile.config.ConfigProvider
 
 @Path("/")
-class GreetingResource:
+class GreetingResource(
+    // Let's inject the configuration property "greeting.message" into a variable
+    @ConfigProperty(name = "greeting.message") message: String
+  ):
     @GET
     @Path("/hello")
     @Produces(Array(TEXT_PLAIN))
-    def hello() = "Hello from RESTEasy Reactive in Scala 3"
+    def hello() =
+        // Or programatically access the configuration property greeting.suffix
+        val messageSuffix = ConfigProvider.getConfig().getValue("greeting.suffix", classOf[String])
+        s"Hello ${message} from RESTEasy Reactive in Scala 3${messageSuffix}"
 
     // This is an endpoint which greets a name or names passed via a query parameter "name"
     @GET
