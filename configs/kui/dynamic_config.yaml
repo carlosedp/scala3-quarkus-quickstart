@@ -2,9 +2,9 @@ auth:
   type: DISABLED
 kafka:
   clusters:
-  - bootstrapServers: kafka:9092
-    name: Docker-compose
-    properties: {}
-    readOnly: false
+    - bootstrapServers: kafka:9092
+      name: Quarkus-Docker-Compose Broker
+      properties: {}
+      readOnly: false
 rbac:
   roles: []
