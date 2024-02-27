@@ -93,10 +93,10 @@
         $("#name").val(name);
         $("#email").val(email);
         $("#password").val("");
-        // // Replace submit button with update button
-        $("#send-user").replaceWith(`<input class="btn btn-info" id="submit-update-user" type="submit" value="Update">`);
-        // Add a cancel button
-        $("#submit-update-user").after(`<input class="btn btn-info" id="cancel-update-user" type="submit" value="Cancel">`);
+        // // Replace submit button with update button and add a cancel button
+        $("#send-user").replaceWith(`<input class="btn btn-info" id="submit-update-user" type="submit" value="Update"><input class="btn btn-info" id="cancel-update-user" type="submit" value="Cancel">`);
+        // Trigger reload
+        $("#table1").load(location.href + " #table1");
     });
 
     // Cancel update on click
