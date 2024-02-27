@@ -13,7 +13,7 @@ class GreetingResourceTest:
         Given()
             .When(req =>
                 req.get(url)
-            ).Then(res =>
+            ).ThenAssert(res =>
                 res.statusCode(200)
                 res.body(is(result))
             )
