@@ -15,7 +15,8 @@ class ArticleProcessor:
     @Timed(name = "processArticleTime", description = "A measure of how long it takes to process an article")
     def processArticle(article: Article) =
         Log.info(s"Received article: ${article}")
-        Thread.sleep(1500 + (math.random * 500).toInt)
+        val processingTime = 1500 + (math.random * 500).toInt
+        Thread.sleep(processingTime)
         val processedArticle = article.copy(status = ArticleStatus.Processed)
-        Log.info(s"Processed article: ${processedArticle}")
+        Log.info(s"Processed article: ${processedArticle} in ${processingTime}ms")
         processedArticle
