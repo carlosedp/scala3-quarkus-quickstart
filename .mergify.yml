@@ -1,5 +1,5 @@
 pull_request_rules:
-  - name: Automatic merge on approval and CI success
+  - name: Automatic merge on approval label and CI success
     conditions:
       - base=main
       - label="merge"
@@ -15,6 +15,7 @@ pull_request_rules:
       - author=dependabot[bot]
       - status-success=build
       - "#review-requested=0"
+      - -dependabot-dependency-name~=org.scala-lang
     actions:
       merge:
         method: squash
