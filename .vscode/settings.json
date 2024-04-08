@@ -12,7 +12,8 @@
     "kafka.*",
     "mp.*",
     "quarkus.datasource.*",
-    "greeting.*"
+    "greeting.*",
+    "quarkus.hibernate-orm.*"
   ],
   "qute.validation.enabled": false,
 }

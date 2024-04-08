@@ -16,7 +16,7 @@
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>3.9.2</quarkus.platform.version>
     <scala-maven-plugin.version>4.8.1</scala-maven-plugin.version>
-    <scala.version>3.3.1</scala.version>
+    <scala.version>3.3.3</scala.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.2.5</surefire-plugin.version>
     <sonar.organization>carlosedp</sonar.organization>
@@ -41,7 +41,7 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-reactive</artifactId>
+      <artifactId>quarkus-rest</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -65,7 +65,7 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
+      <artifactId>quarkus-rest-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>com.github.pjfanning</groupId>
@@ -80,7 +80,7 @@
     <!-- ######## Quarkus Kafka #### -->
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+      <artifactId>quarkus-messaging-kafka</artifactId>
     </dependency>
     <dependency>
       <groupId>io.smallrye.reactive</groupId>
@@ -127,7 +127,7 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-reactive-qute</artifactId>
+      <artifactId>quarkus-rest-qute</artifactId>
     </dependency>
     <!-- ######## Quarkus JUnit test dependencies ######## -->
     <dependency>
@@ -243,6 +243,23 @@
             <arg>-Ysemanticdb</arg>
           </args>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.antipathy</groupId>
+        <artifactId>mvn-scalafmt_2.13</artifactId>
+        <version>1.1.1684076452.9f83818</version>
+        <configuration>
+          <configLocation>${project.basedir}/.scalafmt.conf</configLocation>
+        </configuration>
+        <executions>
+          <execution>
+            <?m2e ignore?>
+            <phase>validate</phase>
+            <goals>
+              <goal>format</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
