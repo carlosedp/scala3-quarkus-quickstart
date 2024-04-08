@@ -86,7 +86,7 @@ WORKDIR /project
 RUN --mount=type=cache,target=/root/.m2 mvn package -Dmaven.test.skip
 
 # Runtime image
-FROM docker.io/ibm-semeru-runtimes:open-21-jdk-jammy
+FROM docker.io/ibm-semeru-runtimes:open-21-jre-jammy
 
 ENV LANGUAGE='en_US:en'
 
