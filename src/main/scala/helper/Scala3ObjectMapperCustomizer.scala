@@ -1,7 +1,7 @@
 package helper
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.scala.{DefaultScalaModule, EnumModule}
+import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import io.quarkus.jackson.ObjectMapperCustomizer
 import jakarta.inject.Singleton
 
@@ -11,5 +11,3 @@ class Scala3ObjectMapperCustomizer extends ObjectMapperCustomizer:
         // General Scala support
         // https://github.com/FasterXML/jackson-module-scala
         mapper.registerModule(DefaultScalaModule)
-        // Suport for Scala 3 Enums
-        mapper.registerModule(EnumModule)
