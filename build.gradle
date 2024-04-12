@@ -1,0 +1,83 @@
+plugins {
+    id "java"
+    id "scala"
+    id "io.quarkus"
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+def VERSIONS = [
+    QUARKUS_SCALA3: "1.0.0",
+    SCALA3        : "3.3.3",
+    JACKSON       : "2.17.0",
+    AWAITILITY    : "4.2.1",
+    MAGNUM        : "1.1.1"
+]
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    // Scala 3 Integration
+    implementation "io.quarkiverse.scala:quarkus-scala3:${VERSIONS.QUARKUS_SCALA3}"
+    implementation "org.scala-lang:scala3-library_3:${VERSIONS.SCALA3}"
+    // Quarkus Libs
+    implementation "io.quarkus:quarkus-arc"
+    implementation "io.quarkus:quarkus-rest"
+    implementation "io.quarkus:quarkus-smallrye-openapi"
+    implementation "io.quarkus:quarkus-rest-qute"
+    implementation "io.quarkus:quarkus-smallrye-metrics"
+    implementation "io.quarkus:quarkus-smallrye-health"
+    // Quarkus Test Libs
+    testImplementation "io.quarkus:quarkus-junit5"
+    testImplementation "io.quarkus:quarkus-jacoco"
+    testImplementation "io.rest-assured:rest-assured"
+    testImplementation "org.awaitility:awaitility:${VERSIONS.AWAITILITY}"
+    // Jackson
+    implementation "io.quarkus:quarkus-jackson"
+    implementation "io.quarkus:quarkus-rest-jackson"
+    implementation "com.fasterxml.jackson.module:jackson-module-scala_3:${VERSIONS.JACKSON}"
+    // Kafka
+    implementation "io.quarkus:quarkus-messaging-kafka"
+    testImplementation "io.smallrye.reactive:smallrye-reactive-messaging-in-memory"
+    // Hibernate ORM
+    implementation "io.quarkus:quarkus-hibernate-orm"
+    // JDBC Driver
+    implementation "io.quarkus:quarkus-jdbc-postgresql"
+    // Narayana JTA
+    implementation "io.quarkus:quarkus-narayana-jta"
+    // Flyway DB Migration
+    implementation "io.quarkus:quarkus-flyway"
+    // Scala 3 Magnum DB
+    implementation "com.augustnagro:magnum_3:${VERSIONS.MAGNUM}"
+}
+
+group "org.acme"
+version "1.0.0-SNAPSHOT"
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.additionalParameters = [
+        "-feature",
+        "-Wunused:all",
+    ]
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+    exclude '**/*IT*' // Ignore Integration Tests for now since we use Maven default directory structure
+}
+compileJava {
+    options.encoding = "UTF-8"
+    options.compilerArgs << "-parameters"
+}
+
+compileTestJava {
+    options.encoding = "UTF-8"
+}
