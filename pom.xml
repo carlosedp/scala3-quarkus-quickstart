@@ -55,7 +55,7 @@
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
-      <artifactId>scala3-compiler_3</artifactId>
+      <artifactId>scala3-library_3</artifactId>
       <version>${scala.version}</version>
     </dependency>
     <!-- ######## Quarkus Jackson and Scala Integration  ######## -->
@@ -230,7 +230,6 @@
           </execution>
         </executions>
         <configuration>
-          <scalaVersion>${scala.version}</scalaVersion>
           <args>
             <arg>-Wunused:all</arg>
             <arg>-feature</arg>
