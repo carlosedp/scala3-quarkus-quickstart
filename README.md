@@ -38,6 +38,7 @@ This repository demonstrates multiple Quarkus concepts, as:
 - Use of [rest-assured](https://github.com/rest-assured/rest-assured) with a [Scala 3 wrapper](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/test/scala/helper/RestAssuredHelper.scala) for testing REST as in [RestAssuredHelperTest.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/test/scala/helper/RestAssuredHelperTest.scala)
 - Application [startup and shutdown](https://quarkus.io/guides/lifecycle) as in [Main.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/main/scala/org/acme/Main.scala)
 - Application [Metrics](https://quarkus.io/guides/smallrye-metrics) for Prometheus as in [GreetingResource.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/21a6bf51007210d2ae5d6a8bb96ff36b6c88c9a6/src/main/scala/org/acme/GreetingResource.scala#L17) and [ArticleProcessor.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/21a6bf51007210d2ae5d6a8bb96ff36b6c88c9a6/src/main/scala/org/acme/kafka/ArticleProcessor.scala#L15-L16)
+- Scala Futures as in [GreetingResource.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/main/scala/org/acme/GreetingResource.scala#L52) with async method calls using Scala sttp library.
 
 ## Running the application in dev mode
 

@@ -75,6 +75,11 @@
       <artifactId>scala3-compiler_3</artifactId>
       <version>${scala.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.softwaremill.sttp.client3</groupId>
+      <artifactId>core_3</artifactId>
+      <version>3.9.5</version>
+    </dependency>
     <!-- ######## Quarkus Jackson and Scala Integration  ######## -->
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
