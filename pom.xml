@@ -70,6 +70,11 @@
       <artifactId>scala3-library_3</artifactId>
       <version>${scala.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala3-compiler_3</artifactId>
+      <version>${scala.version}</version>
+    </dependency>
     <!-- ######## Quarkus Jackson and Scala Integration  ######## -->
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
