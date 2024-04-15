@@ -103,6 +103,8 @@ Be aware that it’s not an _über-jar_ as the dependencies are copied into the 
 
 The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
 
+Running docker-compose (or podman-compose), builds the image using the `./src/main/docker/Dockerfile.openj9` Dockerfile and the application as a `jar`. Editing the `docker-compose-yml` file you can change the default JVM base container.
+
 If you want to build an _über-jar_, execute the following command:
 
 ```shell script
@@ -151,6 +153,15 @@ To reuse this code as a template for your own applications, remember to change t
 - If Sonarcloud is not needed, change:
   - Remove the GitHub action (./github/workflows/CI.yaml) cache task and update the test task removing additional sonar mvn tasks
   - Remove `sonar` properties from pom.xml
+
+## Build Tool Use
+
+The project contains build config for both Maven and Gradle.
+
+You can choose your tool and remove the files related to the build tool not in use:
+
+Maven files: `.mvn mvnw mvnw.bat pom.xml`
+Gradle files: `gradle .build.gradle gradle.properties gradlew gradlew.bat settings.gradle`
 
 ### RESTEasy Reactive
 

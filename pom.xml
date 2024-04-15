@@ -34,7 +34,7 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
-    <!-- ######## Quarkus Main Dependencies ######## -->
+    <!-- ######## Quarkus Libs ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
@@ -46,6 +46,18 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-qute</artifactId>
     </dependency>
     <!-- ######## Quarkus Scala 3 ######## -->
     <dependency>
@@ -60,14 +72,6 @@
     </dependency>
     <!-- ######## Quarkus Jackson and Scala Integration  ######## -->
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jackson</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-jackson</artifactId>
-    </dependency>
-    <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-scala_3</artifactId>
       <version>2.17.0</version>
@@ -80,13 +84,6 @@
     <dependency>
       <groupId>io.smallrye.reactive</groupId>
       <artifactId>smallrye-reactive-messaging-in-memory</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <!-- ######## Await for events in test cases ######## -->
-    <dependency>
-      <groupId>org.awaitility</groupId>
-      <artifactId>awaitility</artifactId>
-      <version>4.2.1</version>
       <scope>test</scope>
     </dependency>
     <!-- ######## Quarkus Health Check Endpoints ######## -->
@@ -120,10 +117,6 @@
       <artifactId>magnum_3</artifactId>
       <version>1.1.1</version>
     </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-qute</artifactId>
-    </dependency>
     <!-- ######## Quarkus JUnit test dependencies ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -138,6 +131,12 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jacoco</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <version>4.2.1</version>
       <scope>test</scope>
     </dependency>
     <!-- ######## Metrics dependencies ######## -->
