@@ -13,7 +13,7 @@ object Main:
 class MainApp extends QuarkusApplication:
     def run(args: String*): Int =
         Log.debug("Running MainApp... processing startup logic")
-        Log.debug("Startup args: " + args.mkString(", "))
+        Log.debug(s"Startup args: ${if args.isEmpty then "none" else args.mkString(", ")}")
         Quarkus.waitForExit()
         Log.debug("Shutting down MainApp... processing shutdown logic")
         0

@@ -1,18 +1,18 @@
-# scala3-quarkus-quickstart
+# scala3-quarkus-quickstart <!-- omit in toc -->
 
 [![CI](https://github.com/carlosedp/scala3-quarkus-quickstart/actions/workflows/CI.yaml/badge.svg)](https://github.com/carlosedp/scala3-quarkus-quickstart/actions/workflows/CI.yaml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=carlosedp_scala3-quarkus-quickstart&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=carlosedp_scala3-quarkus-quickstart)
 [![codecov](https://codecov.io/gh/carlosedp/scala3-quarkus-quickstart/graph/badge.svg?token=IlH0MwK3RA)](https://codecov.io/gh/carlosedp/scala3-quarkus-quickstart)
 
-This project is quickstart using Scala 3 and Quarkus, the Supersonic Subatomic Java Framework.
+This project is a quickstart using Scala 3 and Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
 
 To learn more about Scala and new in [Scala 3](https://docs.scala-lang.org/scala3/book/introduction.html), check-out <https://docs.scala-lang.org/scala3/new-in-scala3.html>.
 
-## Development tools recommendation
+## Development tools recommendation <!-- omit in toc -->
 
-To start developing in Quarkus/Scala 3, I recommend the following:
+To start developing in Quarkus/Scala 3, I recommend the following tools:
 
 - [Coursier](https://get-coursier.io/) to manage Scala tools and JVM install
 - GraalVM 21 installed thru Coursier
@@ -25,10 +25,10 @@ To start developing in Quarkus/Scala 3, I recommend the following:
   - [Scaladex search](https://marketplace.visualstudio.com/items?itemName=baccata.scaladex-search)
   - [Quarkus Tools](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-quarkus)
 
-The repository also comes with a [Github Action](https://github.com/carlosedp/scala3-quarkus-quickstart/actions/workflows/CI.yaml) that runs tests on PRs and pushes.
+This repository demonstrates multiple Quarkus concepts and provides tooling, such as:
 
-This repository demonstrates multiple Quarkus concepts, as:
-
+- Running automated tests with [Github Actions](https://github.com/carlosedp/scala3-quarkus-quickstart/actions/workflows/CI.yaml) on PRs and pushes
+- Maven and Gradle build tools, configured and provided as a choice to the user
 - Application [Config](https://quarkus.io/guides/config) as in [GreetingResource.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/main/scala/org/acme/GreetingResource.scala)
 - Apache [Kafka](https://quarkus.io/guides/kafka) as in [ArticleProducerConsumer.scala/ArticleProcessor.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/main/scala/org/acme/kafka)
 - Database Persistence using [Scala Magnum](https://github.com/AugustNagro/magnum) as in [persistence/magnum](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/main/scala/org/acme/persistence/magnum)
@@ -36,16 +36,33 @@ This repository demonstrates multiple Quarkus concepts, as:
 - Using Serialization with support for Scala types and Enums as in [Scala3ObjectMapperCustomizerTest.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/test/scala/org/acme/Scala3ObjectMapperCustomizerTest.scala)
 - Using [Qute templates](https://quarkus.io/guides/qu$$te) as in [UserResource.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/tree/main/src/main/scala/org/acme/persistence/magnum/UserResource.scala)
 - Use of [rest-assured](https://github.com/rest-assured/rest-assured) with a [Scala 3 wrapper](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/test/scala/helper/RestAssuredHelper.scala) for testing REST as in [RestAssuredHelperTest.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/test/scala/helper/RestAssuredHelperTest.scala)
-- Application [startup and shutdown](https://quarkus.io/guides/lifecycle) as in [Main.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/main/scala/org/acme/Main.scala)
+- Application [startup and shutdown customization](https://quarkus.io/guides/lifecycle) as in [Main.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/main/scala/org/acme/Main.scala)
 - Application [Metrics](https://quarkus.io/guides/smallrye-metrics) for Prometheus as in [GreetingResource.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/21a6bf51007210d2ae5d6a8bb96ff36b6c88c9a6/src/main/scala/org/acme/GreetingResource.scala#L17) and [ArticleProcessor.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/21a6bf51007210d2ae5d6a8bb96ff36b6c88c9a6/src/main/scala/org/acme/kafka/ArticleProcessor.scala#L15-L16)
 - Scala Futures as in [GreetingResource.scala](https://github.com/carlosedp/scala3-quarkus-quickstart/blob/main/src/main/scala/org/acme/GreetingResource.scala#L52) with async method calls using Scala sttp library.
+- Docker-compose configuration providing the full stack of requirements for the demos (Kafka, database, Metrics, etc)
+
+## Table of Contents <!-- omit in toc -->
+
+- [Running the application in dev mode](#running-the-application-in-dev-mode)
+  - [Simple greet app](#simple-greet-app)
+  - [Kafka Producer -\> Processor -\> Consumer](#kafka-producer---processor---consumer)
+  - [Database Persistence](#database-persistence)
+- [Running Tests](#running-tests)
+- [Packaging and running the application](#packaging-and-running-the-application)
+- [Creating a native executable](#creating-a-native-executable)
+- [Tooling UI](#tooling-ui)
+- [Command Matrix](#command-matrix)
+- [Build Tool Usage](#build-tool-usage)
+- [Customizing provided code](#customizing-provided-code)
+
 
 ## Running the application in dev mode
 
 Run your application in dev mode that enables live coding using:
 
 ```shell script
-./mvnw compile quarkus:dev
+./mvnw compile quarkus:dev #or
+./gradlew --console=plain quarkusDev
 # or using the quarkus-cli (https://quarkus.io/get-started/)
 quarkus dev
 ```
@@ -89,7 +106,12 @@ To run tests, use:
 ```sh
 # using quarkus-cli which will run in continuous testing
 quarkus test
+# or using Maven/Gradle
+./mvnw -B verify
+./gradlew test
 ```
+
+Quakus tooling runs all requirements like the database, Kafka broker, etc on containers using a locally installed Docker or Podman.
 
 ## Packaging and running the application
 
@@ -132,7 +154,7 @@ You can then execute your native executable with: `./target/code-with-quarkus-1.
 
 If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
 
-## UI for tools
+## Tooling UI
 
 The following URLs can be used to manage the deployed tools by Quarkus or Docker-Compose stack (when used):
 
@@ -143,19 +165,28 @@ The following URLs can be used to manage the deployed tools by Quarkus or Docker
 - PGadmin (Postgres admin interface) (using docker-compose) - <http://localhost:8088>
 - Prometheus collecting application and JVM metrics (using docker-compose) - <http://localhost:9090>
 
-## Provided Code
+## Command Matrix
 
-To reuse this code as a template for your own applications, remember to change the following:
+Below are the most used commands for development/test/package for each build tool:
 
-- Create account on [Sonarcloud](https://sonarcloud.io) for analisys and [Codecov](https://app.codecov.io/) if desired
-- Create account on [Mergify](https://dashboard.mergify.com/) if desired and configure the actions on `.mergify.yml`
-- Update readme pointing to your own Sonarcloud (if kept), Codecov and GitHub action badges
-- For database, if using Hibernate, you can remove Scala 3 Magnum dependencies, if using Magnum, can remove Hibernate
-- If Sonarcloud is not needed, change:
-  - Remove the GitHub action (./github/workflows/CI.yaml) cache task and update the test task removing additional sonar mvn tasks
-  - Remove `sonar` properties from pom.xml
+| Task                      | Quarkus Command                                                | Maven Command                                                   | Gradle Command                                                                        |
+| ------------------------- | -------------------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Dev Mode                  | `quarkus dev`                                                  | `./mvnw quarkus:dev`                                            | `./gradlew quarkusDev`                                                                |
+| List Extensions           | `quarkus extension`                                            | `./mvnw quarkus:list-extensions`                                | `./gradlew listExtensions`                                                            |
+| Add Extension             | `quarkus extension add smallrye-*`                             | `./mvnw quarkus:add-extension -Dextensions='smallrye-*'`        | `./gradlew addExtension --extensions='smallrye-*'`                                    |
+| Run Tests                 | `quarkus test`                                                 | `./mvnw -B verify`                                              | `./gradlew test`                                                                      |
+| Download deps offline     |                                                                | `./mvnw quarkus:go-offline`                                     | `./gradlew quarkusGoOffline`                                                          |
+| Package Jar               | `quarkus build`                                                | `./mvnw install`                                                | `./gradlew build`                                                                     |
+| Uber Jar                  | `quarkus build -Dquarkus.package.type=uber-jar`                | `./mvnw package -Dquarkus.package.type=uber-jar`                | `./gradlew build -Dquarkus.package.type=uber-jar`                                     |
+| Native Binary             | `quarkus build --native`                                       | `./mvnw package -Dnative`                                       | `./gradlew build -Dquarkus.package.type=native`                                       |
+| Native Bin (in container) | `quarkus build --native -Dquarkus.native.container-build=true` | `./mvnw package -Dnative -Dquarkus.native.container-build=true` | `./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true` |
 
-## Build Tool Use
+Refs:
+
+- <https://quarkus.io/guides/maven-tooling>
+- <https://quarkus.io/guides/gradle-tooling>
+
+## Build Tool Usage
 
 The project contains build config for both Maven and Gradle.
 
@@ -164,8 +195,15 @@ You can choose your tool and remove the files related to the build tool not in u
 Maven files: `.mvn mvnw mvnw.bat pom.xml`
 Gradle files: `gradle .build.gradle gradle.properties gradlew gradlew.bat settings.gradle`
 
-### RESTEasy Reactive
+## Customizing provided code
 
-Easily start your Reactive RESTful Web Services
+To reuse this code as a template for your own applications, remember to change the following:
 
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+- For code analisys, create accounts on [Sonarcloud](https://sonarcloud.io) and [Codecov](https://app.codecov.io/) if desired
+- For Action automations, create an account on [Mergify](https://dashboard.mergify.com/) if desired and configure the actions on `.mergify.yml`
+- Update readme pointing to your own Sonarcloud (if kept), Codecov and GitHub action badges
+- The codebase is very independent from each other so one could remove Kafka, Database, Greet without breaking the other functionality
+- For databases, if using Hibernate, you can remove Scala 3 Magnum dependencies, if using Magnum, can remove Hibernate. All dependencies are commented in `pom.xml` or `build.gradle`
+- If Sonarcloud is not needed, change:
+  - Remove the GitHub action (./github/workflows/CI.yaml) cache task and update the test task removing additional sonar mvn tasks
+  - Remove `sonar` properties from pom.xml
