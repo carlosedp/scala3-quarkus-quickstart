@@ -3,6 +3,7 @@ plugins {
     id "scala"
     id "io.quarkus"
     id 'cz.augi.gradle.scalafmt' version '1.21.2'
+    id 'io.github.cosmicsilence.scalafix' version '0.2.1'
 }
 
 repositories {
@@ -84,4 +85,15 @@ compileJava {
 
 compileTestJava {
     options.encoding = "UTF-8"
+}
+
+scalafix {
+    ignoreSourceSets = [ 'quarkus-generated-sources', 'quarkus-test-generated-sources' ]
+}
+
+// Custom Tasks
+task lint(type: GradleBuild) {
+    group 'Custom project tasks'
+    description 'Run code linting tasks (scalafmt, scalafix, etc)'
+    tasks = ['scalafmt', 'scalafix']
 }
