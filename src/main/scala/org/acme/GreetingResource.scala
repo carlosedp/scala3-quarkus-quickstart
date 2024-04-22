@@ -1,19 +1,18 @@
 package org.acme
 
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.duration.DurationInt
+import scala.concurrent.{Await, Future}
+import scala.util.Random
+
+import io.quarkus.logging.Log
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType.*
-import io.quarkus.logging.Log
 import org.eclipse.microprofile.config.ConfigProvider
 import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.eclipse.microprofile.metrics.annotation.Counted
 import org.jboss.resteasy.reactive.RestQuery
-
-import scala.concurrent.Future
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.DurationInt
-import scala.concurrent.Await
 import sttp.client3.*
-import scala.util.Random
 
 @Path("/")
 class GreetingResource(
