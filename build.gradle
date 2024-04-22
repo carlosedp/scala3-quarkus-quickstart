@@ -2,6 +2,7 @@ plugins {
     id "java"
     id "scala"
     id "io.quarkus"
+    id 'cz.augi.gradle.scalafmt' version '1.21.2'
 }
 
 repositories {
@@ -14,7 +15,8 @@ def VERSIONS = [
     SCALA3        : "3.3.3",
     JACKSON       : "2.17.0",
     AWAITILITY    : "4.2.1",
-    MAGNUM        : "1.1.1"
+    MAGNUM        : "1.1.1",
+    STTP          : "3.9.5",
 ]
 
 dependencies {
@@ -23,7 +25,7 @@ dependencies {
     implementation "io.quarkiverse.scala:quarkus-scala3:${VERSIONS.QUARKUS_SCALA3}"
     implementation "org.scala-lang:scala3-library_3:${VERSIONS.SCALA3}"
     implementation "org.scala-lang:scala3-compiler_3:${VERSIONS.SCALA3}"
-    implementation "com.softwaremill.sttp.client3:core_3:3.9.5"
+    implementation "com.softwaremill.sttp.client3:core_3:${VERSIONS.STTP}"
     // Quarkus Libs
     implementation "io.quarkus:quarkus-arc"
     implementation "io.quarkus:quarkus-rest"
