@@ -86,3 +86,14 @@ compileJava {
 compileTestJava {
     options.encoding = "UTF-8"
 }
+
+scalafix {
+    ignoreSourceSets = [ 'quarkus-generated-sources', 'quarkus-test-generated-sources' ]
+}
+
+// Custom Tasks
+task lint(type: GradleBuild) {
+    group 'Custom project tasks'
+    description 'Run code linting tasks (scalafmt, scalafix, etc)'
+    tasks = ['scalafmt', 'scalafix']
+}
