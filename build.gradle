@@ -76,7 +76,10 @@ tasks.withType(ScalaCompile) {
 
 test {
     systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
-    exclude '**/*IT*' // Ignore Integration Tests for now since we use Maven default directory structure
+    // Ignore Integration Tests for now since we use Maven default directory structure
+    // To use this on Gradle remove the "exclude" line below and move the IT files to src/integrationTest/scala
+    // Eg. move src/test/scala/org/acme/GreetingResourceIT.scala to src/integrationTest/scala/org/acme/GreetingResourceIT.scala
+    exclude '**/*IT*'
 }
 compileJava {
     options.encoding = "UTF-8"
