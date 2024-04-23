@@ -14,7 +14,7 @@ repositories {
 def VERSIONS = [
     QUARKUS       : "3.9.3",
     QUARKUS_SCALA3: "1.0.0",
-    SCALA3        : "3.3.3",
+    SCALA3        : "3.4.1",
     JACKSON       : "2.17.0",
     AWAITILITY    : "4.2.1",
     MAGNUM        : "1.1.1",
