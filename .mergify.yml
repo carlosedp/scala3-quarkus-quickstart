@@ -9,13 +9,13 @@ pull_request_rules:
       merge:
         method: squash
 
-  - name: Automatic merge Dependabot PRs on CI success
-    conditions:
-      - base=main
-      - author=dependabot[bot]
-      - status-success=build
-      - "#review-requested=0"
-      - -dependabot-dependency-name~=org.scala-lang
-    actions:
-      merge:
-        method: squash
+  # - name: Automatic merge Dependabot PRs on CI success
+  #   conditions:
+  #     - base=main
+  #     - author=dependabot[bot]
+  #     - status-success=build
+  #     - "#review-requested=0"
+  #     - -dependabot-dependency-name~=org.scala-lang
+  #   actions:
+  #     merge:
+  #       method: squash
