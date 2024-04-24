@@ -181,6 +181,14 @@ Below are the most used commands for development/test/package for each build too
 | Native Binary             | `quarkus build --native`                                       | `./mvnw package -Dnative`                                       | `./gradlew build -Dquarkus.package.type=native`                                       |
 | Native Bin (in container) | `quarkus build --native -Dquarkus.native.container-build=true` | `./mvnw package -Dnative -Dquarkus.native.container-build=true` | `./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true` |
 
+Scala lint tools like ScalaFmt and ScalaFix can be run using the lint goal/task in Maven and Gradle as:
+
+```sh
+./mvnw -Plint
+#or
+./gradlew lint
+```
+
 Refs:
 
 - <https://quarkus.io/guides/maven-tooling>

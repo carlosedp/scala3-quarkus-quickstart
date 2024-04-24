@@ -264,6 +264,11 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.2.0</version>
+      </plugin>
     </plugins>
   </build>
   <profiles>
@@ -277,6 +282,18 @@
       <properties>
         <skipITs>false</skipITs>
         <quarkus.package.type>native</quarkus.package.type>
+      </properties>
+    </profile>
+    <profile>
+      <!-- This profile runs linting tools like scalafmt and scalafix -->
+      <!-- Scalafix workaround using exec plugin until scalafix maven plugin supports Scala 3 -->
+      <id>lint</id>
+      <build>
+        <defaultGoal>clean compile scalafmt:format exec:exec</defaultGoal>        <!-- Run lint goals -->
+      </build>
+      <properties>
+        <exec.executable>scalafix</exec.executable>
+        <exec.args>. --auto-classpath --scalac-options -Yrangepos --scala-version ${scala.version}</exec.args>
       </properties>
     </profile>
   </profiles>
