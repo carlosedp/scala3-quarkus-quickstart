@@ -201,7 +201,7 @@ The project contains build config for both Maven and Gradle.
 You can choose your tool and remove the files related to the build tool not in use:
 
 Maven files: `.mvn mvnw mvnw.bat pom.xml`
-Gradle files: `gradle .build.gradle gradle.properties gradlew gradlew.bat settings.gradle`
+Gradle files: `.gradle gradlew gradlew.bat build.gradle settings.gradle`
 
 ## Customizing provided code
 
