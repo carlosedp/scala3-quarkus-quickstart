@@ -18,7 +18,7 @@ def VERSIONS = [
     JACKSON       : "2.17.0",
     AWAITILITY    : "4.2.1",
     MAGNUM        : "1.1.1",
-    STTP          : "3.9.5",
+    STTP          : "3.9.6",
 ]
 
 dependencies {
