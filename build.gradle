@@ -3,7 +3,7 @@ plugins {
     id "scala"
     id "io.quarkus"
     id 'cz.augi.gradle.scalafmt' version '1.21.2'
-    id 'io.github.cosmicsilence.scalafix' version '0.2.1'
+    id 'io.github.cosmicsilence.scalafix' version '0.2.2'
 }
 
 repositories {
