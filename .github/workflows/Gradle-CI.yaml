@@ -23,8 +23,13 @@ jobs:
           java-version: "21"
           cache: "gradle"
 
+      - name: Cache Docker images.
+        uses: ScribeMD/docker-cache@0.5.0
+        with:
+          key: docker-${{ runner.os }}-${{ hashFiles('**/pom.xml', '**/build.gradle', '**/settings.gradle', '**/docker-compose.yml') }}
+
       - name: Build and Test with Gradle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew check
+        run: ./gradlew --console=plain test

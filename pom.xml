@@ -14,7 +14,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.9.5</quarkus.platform.version>
+    <quarkus.platform.version>3.10.0</quarkus.platform.version>
     <scala-maven-plugin.version>4.9.0</scala-maven-plugin.version>
     <scala.version>3.3.3</scala.version>
     <skipITs>true</skipITs>
@@ -46,6 +46,10 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-openapi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-database-postgresql</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -84,7 +88,6 @@
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-scala_3</artifactId>
-      <version>2.17.0</version>
     </dependency>
     <!-- ######## Quarkus Kafka #### -->
     <dependency>
@@ -146,7 +149,6 @@
     <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
-      <version>4.2.1</version>
       <scope>test</scope>
     </dependency>
     <!-- ######## Metrics dependencies ######## -->
@@ -281,7 +283,8 @@
       </activation>
       <properties>
         <skipITs>false</skipITs>
-        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.enabled>true</quarkus.native.enabled>
+        <quarkus.package.jar.enabled>false</quarkus.package.jar.enabled>
       </properties>
     </profile>
     <profile>

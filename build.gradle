@@ -3,7 +3,7 @@ plugins {
     id "scala"
     id "io.quarkus"
     id 'cz.augi.gradle.scalafmt' version '1.21.2'
-    id 'io.github.cosmicsilence.scalafix' version '0.2.1'
+    id 'io.github.cosmicsilence.scalafix' version '0.2.2'
 }
 
 repositories {
@@ -12,11 +12,9 @@ repositories {
 }
 
 def VERSIONS = [
-    QUARKUS       : "3.9.5",
+    QUARKUS       : "3.10.0",
     QUARKUS_SCALA3: "1.0.0",
     SCALA3        : "3.3.3",
-    JACKSON       : "2.17.0",
-    AWAITILITY    : "4.2.1",
     MAGNUM        : "1.1.1",
     STTP          : "3.9.6",
 ]
@@ -39,11 +37,11 @@ dependencies {
     testImplementation "io.quarkus:quarkus-junit5"
     testImplementation "io.quarkus:quarkus-jacoco"
     testImplementation "io.rest-assured:rest-assured"
-    testImplementation "org.awaitility:awaitility:${VERSIONS.AWAITILITY}"
+    testImplementation "org.awaitility:awaitility"
     // Jackson
     implementation "io.quarkus:quarkus-jackson"
     implementation "io.quarkus:quarkus-rest-jackson"
-    implementation "com.fasterxml.jackson.module:jackson-module-scala_3:${VERSIONS.JACKSON}"
+    implementation "com.fasterxml.jackson.module:jackson-module-scala_3"
     // Kafka
     implementation "io.quarkus:quarkus-messaging-kafka"
     testImplementation "io.smallrye.reactive:smallrye-reactive-messaging-in-memory"
@@ -55,6 +53,7 @@ dependencies {
     implementation "io.quarkus:quarkus-narayana-jta"
     // Flyway DB Migration
     implementation "io.quarkus:quarkus-flyway"
+    implementation "org.flywaydb:flyway-database-postgresql"
     // Scala 3 Magnum DB
     implementation "com.augustnagro:magnum_3:${VERSIONS.MAGNUM}"
 }
