@@ -9,6 +9,7 @@ import scala.jdk.FutureConverters.*
 import scala.util.Random
 
 import io.quarkus.logging.Log
+import io.smallrye.common.annotation.Blocking
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType.*
 import org.eclipse.microprofile.config.ConfigProvider
@@ -47,7 +48,14 @@ class GreetingResource(
         val names = name.mkString(" and ")
         s"""{"message": "Hello ${names} from RESTEasy Reactive in Scala 3"}"""
 
-    // This is an endpoint which demonstrates how to perform asynchronous operations
+    /**
+     * This is an endpoint which demonstrates how to perform asynchronous
+     * operations. If you call `Await.result` inside this method, annotate it
+     * with @Blocking to make Quarkus move the method to a separate thread pool
+     * meant for blocking operations. Otherwise (as is demonstrated here) return
+     * a `CompletionStage` which can be obtained from Scala Future by using
+     * `scala.jdk.FutureConverters`
+     */
     @GET
     @Path("/greet/async")
     @Produces(Array(TEXT_PLAIN))
@@ -65,7 +73,7 @@ class GreetingResource(
 
         // When both futures are complete, results will be processed in the yield
         // part of the for comprehension.
-        val futures =
+        val futures: Future[String] =
             for
                 sum <- futureSum
                 ip  <- IPFuture.map(_.merge)
