@@ -1,5 +1,13 @@
 package org.acme
 
+import java.util.concurrent.CompletionStage
+
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+import scala.concurrent.duration.DurationInt
+import scala.jdk.FutureConverters.*
+import scala.util.Random
+
 import io.quarkus.logging.Log
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType.*
@@ -8,13 +16,6 @@ import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.eclipse.microprofile.metrics.annotation.Counted
 import org.jboss.resteasy.reactive.RestQuery
 import sttp.client3.*
-
-import java.util.concurrent.CompletionStage
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-import scala.concurrent.duration.DurationInt
-import scala.jdk.FutureConverters.*
-import scala.util.Random
 
 @Path("/")
 class GreetingResource(
