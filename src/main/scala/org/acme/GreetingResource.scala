@@ -1,10 +1,5 @@
 package org.acme
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.duration.DurationInt
-import scala.concurrent.{Await, Future}
-import scala.util.Random
-
 import io.quarkus.logging.Log
 import jakarta.ws.rs.*
 import jakarta.ws.rs.core.MediaType.*
@@ -13,6 +8,13 @@ import org.eclipse.microprofile.config.inject.ConfigProperty
 import org.eclipse.microprofile.metrics.annotation.Counted
 import org.jboss.resteasy.reactive.RestQuery
 import sttp.client3.*
+
+import java.util.concurrent.CompletionStage
+import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+import scala.concurrent.duration.DurationInt
+import scala.jdk.FutureConverters.*
+import scala.util.Random
 
 @Path("/")
 class GreetingResource(
@@ -48,30 +50,31 @@ class GreetingResource(
     @GET
     @Path("/greet/async")
     @Produces(Array(TEXT_PLAIN))
-    def asyncGreeting(): String =
+    def asyncGreeting(): CompletionStage[String] =
         val numsAmount = 10
         Log.debug(s"Generating $numsAmount numbers asynchronously...")
         val startTime = System.currentTimeMillis()
         // Generate 10 numbers asynchronously and sum them up
         val futureSum = Future.sequence((1 to numsAmount).map(_ => generateNum())).map(_.sum)
         // Get the IP address asynchronously
-        val IPFuture = getOwnIP().map(_.body).recover {
+        val IPFuture = getOwnIP().map(_.body).recover:
             case e: Exception =>
                 Log.error("Failed to get the IP address.")
                 Left("Failed to get IP")
-        }
-        // Wait for both futures to complete
+
+        // When both futures are complete, results will be processed in the yield
+        // part of the for comprehension.
         val futures =
             for
                 sum <- futureSum
-                ip  <- IPFuture
-            yield (sum, ip.merge)
-        val (sum, ip) = Await.result(futures, 10.seconds)
-        // Calculate the time it took to generate the numbers, log the output and return the result
-        val endTime = System.currentTimeMillis() - startTime
-        Log.debug(s"My IP is: $ip")
-        Log.debug(s"Generated $numsAmount numbers asynchronously in ${endTime}ms")
-        s"The sum of the $numsAmount generated numbers is $sum. Was generated asynchronously in ${endTime}ms.\nYour IP is: $ip."
+                ip  <- IPFuture.map(_.merge)
+            yield
+                val endTime = System.currentTimeMillis() - startTime
+                Log.debug(s"My IP is: $ip")
+                Log.debug(s"Generated $numsAmount numbers asynchronously in ${endTime}ms")
+                s"The sum of the $numsAmount generated numbers is $sum. Was generated asynchronously in ${endTime}ms.\nYour IP is: $ip."
+
+        futures.asJava
     end asyncGreeting
 
     // This method demonstrates how to use Scala's Future to perform asynchronous operations
