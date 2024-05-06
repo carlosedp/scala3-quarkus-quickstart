@@ -256,7 +256,8 @@
         <configuration>
           <configLocation>${project.basedir}/.scalafmt.conf</configLocation>
         </configuration>
-        <executions>
+        <!-- If enabled, will run the format goal on most goals since validate is a pre-req for compile -->
+        <!-- <executions>
           <execution>
             <?m2e ignore?>
             <phase>validate</phase>
@@ -264,12 +265,17 @@
               <goal>format</goal>
             </goals>
           </execution>
-        </executions>
+        </executions> -->
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>3.2.0</version>
+      </plugin>
+      <plugin>
+        <groupId>io.github.evis</groupId>
+        <artifactId>scalafix-maven-plugin_2.13</artifactId>
+        <version>0.1.9_0.12.1</version>
       </plugin>
     </plugins>
   </build>
@@ -289,15 +295,10 @@
     </profile>
     <profile>
       <!-- This profile runs linting tools like scalafmt and scalafix -->
-      <!-- Scalafix workaround using exec plugin until scalafix maven plugin supports Scala 3 -->
       <id>lint</id>
       <build>
-        <defaultGoal>clean compile scalafmt:format exec:exec</defaultGoal>        <!-- Run lint goals -->
+        <defaultGoal>clean compile test-compile scalafmt:format scalafix:scalafix</defaultGoal>
       </build>
-      <properties>
-        <exec.executable>scalafix</exec.executable>
-        <exec.args>. --auto-classpath --scalac-options -Yrangepos --scala-version ${scala.version}</exec.args>
-      </properties>
     </profile>
   </profiles>
 </project>
