@@ -44,12 +44,15 @@ This repository demonstrates multiple Quarkus concepts and provides tooling, suc
 ## Table of Contents <!-- omit in toc -->
 
 - [Running the application in dev mode](#running-the-application-in-dev-mode)
+- [Application Examples](#application-examples)
   - [Simple greet app](#simple-greet-app)
   - [Kafka Producer -\> Processor -\> Consumer](#kafka-producer---processor---consumer)
   - [Database Persistence](#database-persistence)
+  - [Using Scala Futures](#using-scala-futures)
+  - [Using the full stack as a "production" application](#using-the-full-stack-as-a-production-application)
 - [Running Tests](#running-tests)
 - [Packaging and running the application](#packaging-and-running-the-application)
-- [Creating a native executable](#creating-a-native-executable)
+- [Creating a native executable and container](#creating-a-native-executable-and-container)
 - [Tooling UI](#tooling-ui)
 - [Command Matrix](#command-matrix)
 - [Build Tool Usage](#build-tool-usage)
@@ -76,6 +79,10 @@ Open <http://localhost:8080> that shows Quarkus static demo page. It shows the e
 
 If running the application standalone (for example with native binary), start the Docker-compose stack with `docker-compose up -d` so all requirements are run like Kafka, Kafka-UI for management, Postgres and PGAdmin. Also user and database are created automatically.
 
+## Application Examples
+
+Below there are descriptions for some of the concepts demonstrated in this sample app.
+
 ### Simple greet app
 
 The endpoints <http://localhost:8080/hello> or <http://localhost:8080/greet?name=Yourname> are written in Scala provided by the [GreetingResource.scala](./src/main/scala/org/acme/GreetingResource.scala) source file. Based on input, it returns a text text.
@@ -83,6 +90,10 @@ The endpoints <http://localhost:8080/hello> or <http://localhost:8080/greet?name
 ### Kafka Producer -> Processor -> Consumer
 
 This sample app uses Kafka as a messaging middleware passing data between a Producer, a Consumer and a Processor. There is an HTML interface at <http://localhost:8080/articles.html> to interact with the application. The built-in Kafka UI can be seen at <http://localhost:8080/q/dev-ui/io.quarkus.quarkus-kafka-client/topics>.
+
+The example uses Scala native `case class`es, `Enum`s and uses Jackson for serialization of these objects for processing using Kafka topics. It also generates metrics for amount of messages processed and processing time.
+
+In this example, I force the "mismatch" of channel names in the `application.properties` config (matching names and Kafka topics) to make sure the SmallRye lib doesn't use in-memory queues instead of Kafka itself for message passing as a fallback (<https://quarkus.io/guides/kafka#in-memory-channels>).
 
 ![article submission sample](./docs/articles.png)
 
@@ -98,6 +109,14 @@ The sample using **Scala 3 Magnum** lib lives under <http://localhost:8080/users
 Another sample using **hibernate** which is really un-Scala like, but it's there for reference. Some other Quarkus integrations might expect JPA to be present so there it is.
 
 To view the sample, open <http://localhost:8080/tasks/tasks-page> and interact with the form.
+
+### Using Scala Futures
+
+You can also interop Scala `Future`s with Quarkus as it's used on multiple Scala native async libraries. If using `Await.result` inside a method (which blocks the thread which it was called from), annotate it with `@Blocking` (from `io.smallrye.common.annotation.Blocking`) to make Quarkus move the method to a separate thread pool meant for blocking operations. Otherwise (as is demonstrated on `GreetingResource.scala`) return a `CompletionStage` which can be obtained from Scala Future by using `scala.jdk.FutureConverters`. This is used in the <http://localhost:8080/greet/async> endpoint.
+
+### Using the full stack as a "production" application
+
+The application can be built as a complete production application, in it's own Container image and executed using a `docker-compose` that contains all the application's dependencies (PostgreSQL, Kafka, Prometheus and all UIs for these tools). The Docker Composer file also builds the container image for the application in JVM mode. If desired to use the app in Native Image mode, build the image as instructed [here](#creating-a-native-executable-and-container) and use it's name in the `docker-compose.yml` file `image:` tag and comment the `build:` section to avoid building the JVM based image.
 
 ## Running Tests
 
@@ -136,7 +155,7 @@ If you want to build an _über-jar_, execute the following command:
 
 The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
 
-## Creating a native executable
+## Creating a native executable and container
 
 You can create a native executable using:
 
@@ -144,7 +163,7 @@ You can create a native executable using:
 ./mvnw package -Dnative
 ```
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+Or, if you don't have GraalVM installed, you can build the native executable in a container using:
 
 ```shell script
 ./mvnw package -Dnative -Dquarkus.native.container-build=true
@@ -152,7 +171,19 @@ Or, if you don't have GraalVM installed, you can run the native executable build
 
 You can then execute your native executable with: `./target/code-with-quarkus-1.0.0-SNAPSHOT-runner`
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+To build the container image with the Native Image application, use:
+
+```sh
+quarkus build --native --no-tests -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -Dquarkus.native.builder-image=graalvm
+# or
+./mvnw package -Dnative -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true
+# or
+./gradlew build -Dquarkus.native.enabled=true -Dquarkus.native.container-build=true -Dquarkus.container-image.build=true -Dquarkus.native.builder-image=graalvm
+```
+
+Some libraries (specially those not from Quarkus distribution) might require run-time initialization config in `quarkus.native.additional-build-args` inside `application.properties`. As an example, `scala.util.Random` required this to be able to build the GraalVM native image. To identify this behavior, GraalVM outputs an error as shown [here](https://github.com/scalameta/sbt-native-image/issues/27).
+
+If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling> and <https://quarkus.io/guides/building-native-image#creating-a-container>.
 
 ## Tooling UI
 
