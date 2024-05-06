@@ -2,7 +2,7 @@ package org.acme
 
 import helper.*
 import io.quarkus.test.junit.QuarkusTest
-import org.hamcrest.CoreMatchers.is
+import org.hamcrest.CoreMatchers.{is, containsString}
 import org.junit.jupiter.api.Test
 
 @QuarkusTest
@@ -51,5 +51,17 @@ class GreetingResourceTest:
             "/greet?name=quarkus&name=scala3",
             "Hello quarkus and scala3 from RESTEasy Reactive in Scala 3",
         )
+
+    @Test
+    def testAsyncEndpoint: Unit =
+        Given()
+            .When(req =>
+                req.get("/greet/async")
+            ).ThenAssert(res =>
+                res.statusCode(200)
+                res.body(containsString(
+                    "The sum of the 10 generated numbers is"
+                ))
+            )
 
 end GreetingResourceTest
