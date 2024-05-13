@@ -2,7 +2,7 @@ package org.acme
 
 import helper.*
 import io.quarkus.test.junit.QuarkusTest
-import org.hamcrest.CoreMatchers.{is, containsString}
+import org.hamcrest.CoreMatchers.{containsString, is}
 import org.junit.jupiter.api.Test
 
 @QuarkusTest
@@ -56,12 +56,34 @@ class GreetingResourceTest:
     def testAsyncEndpoint: Unit =
         Given()
             .When(req =>
-                req.get("/greet/async")
+                req.get("/async/future")
             ).ThenAssert(res =>
                 res.statusCode(200)
                 res.body(containsString(
                     "The sum of the 10 generated numbers is"
                 ))
+            )
+
+    @Test
+    def testAsyncEndpointBlocking: Unit =
+        Given()
+            .When(req =>
+                req.get("/async/futureblocking")
+            ).ThenAssert(res =>
+                res.statusCode(200)
+                res.body(containsString(
+                    "The sum of the 10 asynchronously generated numbers is 420"
+                ))
+            )
+
+    @Test
+    def testAsyncEndpointZio: Unit =
+        Given()
+            .When(req =>
+                req.get("/async/zio")
+            ).ThenAssert(res =>
+                res.statusCode(200)
+                res.body(containsString("Hello from ZIO"))
             )
 
 end GreetingResourceTest

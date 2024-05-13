@@ -84,6 +84,11 @@
       <artifactId>core_3</artifactId>
       <version>3.9.6</version>
     </dependency>
+    <dependency>
+      <groupId>dev.zio</groupId>
+      <artifactId>zio_3</artifactId>
+      <version>2.1.1</version>
+    </dependency>
     <!-- ######## Quarkus Jackson and Scala Integration  ######## -->
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>

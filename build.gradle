@@ -4,6 +4,7 @@ plugins {
     id "io.quarkus"
     id 'cz.augi.gradle.scalafmt' version '1.21.2'
     id 'io.github.cosmicsilence.scalafix' version '0.2.2'
+    id "com.github.ben-manes.versions" version "0.51.0"
 }
 
 repositories {
@@ -17,6 +18,7 @@ def VERSIONS = [
     SCALA3        : "3.3.3",
     MAGNUM        : "1.1.1",
     STTP          : "3.9.6",
+    ZIO           : "2.1.1",
 ]
 
 dependencies {
@@ -26,6 +28,7 @@ dependencies {
     implementation "org.scala-lang:scala3-library_3:${VERSIONS.SCALA3}"
     implementation "org.scala-lang:scala3-compiler_3:${VERSIONS.SCALA3}"
     implementation "com.softwaremill.sttp.client3:core_3:${VERSIONS.STTP}"
+    implementation "dev.zio:zio_3:${VERSIONS.ZIO}"
     // Quarkus Libs
     implementation "io.quarkus:quarkus-arc"
     implementation "io.quarkus:quarkus-rest"
