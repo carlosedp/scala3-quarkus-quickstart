@@ -48,7 +48,7 @@ This repository demonstrates multiple Quarkus concepts and provides tooling, suc
   - [Simple greet app](#simple-greet-app)
   - [Kafka Producer -\> Processor -\> Consumer](#kafka-producer---processor---consumer)
   - [Database Persistence](#database-persistence)
-  - [Using Scala Futures](#using-scala-futures)
+  - [Using Scala Futures and Zio](#using-scala-futures-and-zio)
   - [Using the full stack as a "production" application](#using-the-full-stack-as-a-production-application)
 - [Running Tests](#running-tests)
 - [Packaging and running the application](#packaging-and-running-the-application)
@@ -110,9 +110,11 @@ Another sample using **hibernate** which is really un-Scala like, but it's there
 
 To view the sample, open <http://localhost:8080/tasks/tasks-page> and interact with the form.
 
-### Using Scala Futures
+### Using Scala Futures and Zio
 
-You can also interop Scala `Future`s with Quarkus as it's used on multiple Scala native async libraries. If using `Await.result` inside a method (which blocks the thread which it was called from), annotate it with `@Blocking` (from `io.smallrye.common.annotation.Blocking`) to make Quarkus move the method to a separate thread pool meant for blocking operations. Otherwise (as is demonstrated on `GreetingResource.scala`) return a `CompletionStage` which can be obtained from Scala Future by using `scala.jdk.FutureConverters`. This is used in the <http://localhost:8080/greet/async> endpoint.
+You can also interop Scala `Future`s with Quarkus as it's used on multiple Scala native async libraries. If using `Await.result` inside a method (which blocks the thread which it was called from), annotate it with `@Blocking` (from `io.smallrye.common.annotation.Blocking`) to make Quarkus move the method to a separate thread pool meant for blocking operations. Otherwise (as is demonstrated on `ScalaFutureResource.scala`) return a `CompletionStage` which can be obtained from Scala Future by using `scala.jdk.FutureConverters`. This is used in the <http://localhost:8080/async/future> endpoint.
+
+There is also a resource that executes and returns data from a Zio Effect. The example code is at `ScalaZioResource.scala` and it uses some helper method and extension from `ZioHelper.scala` for ease of use. The effect is run and it's return is converted to a native Java `CompletionStage` for Quarkus consumption.
 
 ### Using the full stack as a "production" application
 
