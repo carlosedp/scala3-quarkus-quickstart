@@ -18,7 +18,7 @@ def VERSIONS = [
     SCALA3        : "3.3.3",
     MAGNUM        : "1.1.1",
     STTP          : "3.9.7",
-    ZIO           : "2.1.1",
+    ZIO           : "2.1.2",
 ]
 
 dependencies {
