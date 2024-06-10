@@ -9,6 +9,24 @@ pull_request_rules:
       merge:
         method: squash
 
+  - name: Label Maven PRs
+    conditions:
+      - author~=dependabot
+      - files=pom.xml
+    actions:
+      label:
+        add:
+          - "maven"
+
+  - name: Label Gradle PRs
+    conditions:
+      - author~=dependabot
+      - files~=(build.gradle|settings.gradle)
+    actions:
+      label:
+        add:
+          - "gradle"
+
   # - name: Automatic merge Dependabot PRs on CI success
   #   conditions:
   #     - base=main
