@@ -16,7 +16,7 @@ def VERSIONS = [
     QUARKUS       : "3.11.3",
     QUARKUS_SCALA3: "1.0.0",
     SCALA3        : "3.3.3",
-    MAGNUM        : "1.2.0",
+    MAGNUM        : "1.2.1",
     STTP          : "3.9.7",
     ZIO           : "2.1.4",
 ]
