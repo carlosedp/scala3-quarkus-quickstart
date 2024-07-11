@@ -18,7 +18,7 @@
     <scala-maven-plugin.version>4.9.2</scala-maven-plugin.version>
     <scala.version>3.3.3</scala.version>
     <skipITs>true</skipITs>
-    <surefire-plugin.version>3.3.0</surefire-plugin.version>
+    <surefire-plugin.version>3.3.1</surefire-plugin.version>
     <sonar.organization>carlosedp</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
