@@ -1,7 +1,7 @@
 package org.acme
 
-import io.restassured.module.scala.extensions.*
 import io.quarkus.test.junit.QuarkusTest
+import io.restassured.module.scala.extensions.*
 import org.hamcrest.CoreMatchers.{containsString, is}
 import org.junit.jupiter.api.Test
 

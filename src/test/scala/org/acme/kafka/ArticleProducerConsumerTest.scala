@@ -1,9 +1,9 @@
 package org.acme.kafka
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.restassured.module.scala.extensions.*
 import io.quarkus.test.common.QuarkusTestResource
 import io.quarkus.test.junit.QuarkusTest
+import io.restassured.module.scala.extensions.*
 import io.smallrye.reactive.messaging.memory.InMemoryConnector
 import jakarta.inject.Inject
 import jakarta.ws.rs.core.MediaType

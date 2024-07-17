@@ -29,8 +29,6 @@ dependencies {
     implementation "io.quarkiverse.scala:quarkus-scala3:${VERSIONS.QUARKUS_SCALA3}"
     implementation "org.scala-lang:scala3-library_3:${VERSIONS.SCALA3}"
     implementation "org.scala-lang:scala3-compiler_3:${VERSIONS.SCALA3}"
-    implementation "com.softwaremill.sttp.client3:core_3:${VERSIONS.STTP}"
-    implementation "dev.zio:zio_3:${VERSIONS.ZIO}"
     // Quarkus Libs
     implementation "io.quarkus:quarkus-arc"
     implementation "io.quarkus:quarkus-rest"
@@ -60,7 +58,9 @@ dependencies {
     // Flyway DB Migration
     implementation "io.quarkus:quarkus-flyway"
     implementation "org.flywaydb:flyway-database-postgresql"
-    // Scala 3 Magnum DB
+    // Scala 3 libs used on integration examples
+    implementation "com.softwaremill.sttp.client3:core_3:${VERSIONS.STTP}"
+    implementation "dev.zio:zio_3:${VERSIONS.ZIO}"
     implementation "com.augustnagro:magnum_3:${VERSIONS.MAGNUM}"
 }
 
@@ -106,9 +106,14 @@ testlogger {
     slowThreshold 5000
 }
 
-// Custom Tasks
+// Custom Tasks (run with ./gradlew lint, ./gradlew deps)
 task lint(type: GradleBuild) {
     group 'Custom project tasks'
     description 'Run code linting tasks (scalafmt, scalafix, etc)'
     tasks = ['scalafmt', 'scalafix']
+}
+task deps(type: GradleBuild) {
+    group 'Custom project tasks'
+    description 'Check for dependency updates'
+    tasks = ['dependencyUpdates']
 }
