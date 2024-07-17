@@ -5,6 +5,7 @@ plugins {
     id 'cz.augi.gradle.scalafmt' version '1.21.2'
     id 'io.github.cosmicsilence.scalafix' version '0.2.2'
     id "com.github.ben-manes.versions" version "0.51.0"
+    id "com.adarshr.test-logger" version "4.0.0"
 }
 
 repositories {
@@ -15,11 +16,11 @@ repositories {
 def VERSIONS = [
     QUARKUS       : "3.12.2",
     QUARKUS_SCALA3: "1.0.0",
-    SCALA3        : "3.3.3",
+    SCALA3        : "3.4.2",
     MAGNUM        : "1.2.1",
     STTP          : "3.9.7",
     ZIO           : "2.1.6",
-    REST_ASSURED  : "5.5.0",
+    REST_ASSURED  : "5.5.0", // Here we use the latest version of Rest Assured to use the Scala 3 extensions
 ]
 
 dependencies {
@@ -86,6 +87,7 @@ test {
     // Eg. move src/test/scala/org/acme/GreetingResourceIT.scala to src/integrationTest/scala/org/acme/GreetingResourceIT.scala
     exclude '**/*IT*'
 }
+
 compileJava {
     options.encoding = "UTF-8"
     options.compilerArgs << "-parameters"
@@ -97,6 +99,11 @@ compileTestJava {
 
 scalafix {
     ignoreSourceSets = [ 'quarkus-generated-sources', 'quarkus-test-generated-sources' ]
+}
+
+testlogger {
+    theme 'mocha'
+    slowThreshold 5000
 }
 
 // Custom Tasks
