@@ -1,6 +1,6 @@
 package org.acme
 
-import helper.*
+import io.restassured.module.scala.extensions.*
 import io.quarkus.test.junit.QuarkusTest
 import org.hamcrest.CoreMatchers.{containsString, is}
 import org.junit.jupiter.api.Test
@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test
 class GreetingResourceTest:
 
     // Endpoint test helper
+    // The syntax here is more verbose that exposes the `req` and `res` objects
+    // to add request methods and response validations
     def testEndpoint(url: String, result: String) =
         Given()
             .When(req =>
@@ -19,14 +21,13 @@ class GreetingResourceTest:
             )
 
     @Test
+    // The syntax here is more concise and hides the `req` and `res` objects
+    // using `_` and chaining the validation methods
     def testJSONEndpoint: Unit =
         val data: String = Given()
-            .When(req =>
-                req.get("/greet/json")
-            ).Then(res =>
-                res.statusCode(200)
-                res.body("message", is("Hello world from RESTEasy Reactive in Scala 3"))
-            ).Extract(_.path("message"))
+            .When(_.get("/greet/json"))
+            .Then(_.statusCode(200).body("message", is("Hello world from RESTEasy Reactive in Scala 3")))
+            .Extract(_.path("message"))
         assert(data == "Hello world from RESTEasy Reactive in Scala 3")
 
     @Test
@@ -55,35 +56,21 @@ class GreetingResourceTest:
     @Test
     def testAsyncEndpoint: Unit =
         Given()
-            .When(req =>
-                req.get("/async/future")
-            ).ThenAssert(res =>
-                res.statusCode(200)
-                res.body(containsString(
-                    "The sum of the 10 generated numbers is"
-                ))
-            )
+            .When(_.get("/async/future"))
+            .ThenAssert(_.statusCode(200).body(containsString("The sum of the 10 generated numbers is")))
 
     @Test
     def testAsyncEndpointBlocking: Unit =
         Given()
-            .When(req =>
-                req.get("/async/futureblocking")
-            ).ThenAssert(res =>
-                res.statusCode(200)
-                res.body(containsString(
-                    "The sum of the 10 asynchronously generated numbers is 420"
-                ))
+            .When(_.get("/async/futureblocking"))
+            .ThenAssert(
+                _.statusCode(200).body(containsString("The sum of the 10 asynchronously generated numbers is 420"))
             )
 
     @Test
     def testAsyncEndpointZio: Unit =
         Given()
-            .When(req =>
-                req.get("/async/zio")
-            ).ThenAssert(res =>
-                res.statusCode(200)
-                res.body(containsString("Hello from ZIO"))
-            )
+            .When(_.get("/async/zio"))
+            .ThenAssert(_.statusCode(200).body(containsString("Hello from ZIO")))
 
 end GreetingResourceTest

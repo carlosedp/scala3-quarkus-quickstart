@@ -1,7 +1,7 @@
 package org.acme.kafka
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import helper.*
+import io.restassured.module.scala.extensions.*
 import io.quarkus.test.common.QuarkusTestResource
 import io.quarkus.test.junit.QuarkusTest
 import io.smallrye.reactive.messaging.memory.InMemoryConnector
@@ -34,9 +34,7 @@ class ArticleProducerConsumerTest(@Connector("smallrye-in-memory") connector: In
     @Test
     def testUUIDGenerator(): Unit =
         Given()
-            .When(
-                _.get("/article/uuid")
-            ).Then(res =>
+            .When(_.get("/article/uuid")).Then(res =>
                 res.statusCode(200)
                 res.body(is(notNullValue()))
             )
@@ -48,9 +46,7 @@ class ArticleProducerConsumerTest(@Connector("smallrye-in-memory") connector: In
         val articleJson = objectMapper.writeValueAsString(article)
 
         Given()
-            .When(
-                _.body(articleJson).contentType(MediaType.APPLICATION_JSON).post("/article")
-            ).Then(res =>
+            .When(_.body(articleJson).contentType(MediaType.APPLICATION_JSON).post("/article")).Then(res =>
                 res.statusCode(200)
                 res.body(is(article.id))
             )
@@ -62,9 +58,7 @@ class ArticleProducerConsumerTest(@Connector("smallrye-in-memory") connector: In
         val articleJson = objectMapper.writeValueAsString(article)
 
         Given()
-            .When(
-                _.body(articleJson).contentType(MediaType.APPLICATION_JSON).post("/article")
-            ).Then(res =>
+            .When(_.body(articleJson).contentType(MediaType.APPLICATION_JSON).post("/article")).Then(res =>
                 res.statusCode(200)
                 res.body(is(article.id))
             )

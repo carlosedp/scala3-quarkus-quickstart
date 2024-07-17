@@ -16,7 +16,7 @@
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>3.12.2</quarkus.platform.version>
     <scala-maven-plugin.version>4.9.2</scala-maven-plugin.version>
-    <scala.version>3.3.3</scala.version>
+    <scala.version>3.4.2</scala.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.3.1</surefire-plugin.version>
     <sonar.organization>carlosedp</sonar.organization>
@@ -144,6 +144,13 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
+      <version>5.5.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.rest-assured</groupId>
+      <artifactId>scala-extensions</artifactId>
+      <version>5.5.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>

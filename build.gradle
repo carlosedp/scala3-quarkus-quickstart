@@ -19,6 +19,7 @@ def VERSIONS = [
     MAGNUM        : "1.2.1",
     STTP          : "3.9.7",
     ZIO           : "2.1.6",
+    REST_ASSURED  : "5.5.0",
 ]
 
 dependencies {
@@ -39,7 +40,8 @@ dependencies {
     // Quarkus Test Libs
     testImplementation "io.quarkus:quarkus-junit5"
     testImplementation "io.quarkus:quarkus-jacoco"
-    testImplementation "io.rest-assured:rest-assured"
+    testImplementation "io.rest-assured:rest-assured:${VERSIONS.REST_ASSURED}"
+    testImplementation "io.rest-assured:scala-extensions:${VERSIONS.REST_ASSURED}"
     testImplementation "org.awaitility:awaitility"
     // Jackson
     implementation "io.quarkus:quarkus-jackson"
