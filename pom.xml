@@ -82,7 +82,7 @@
     <dependency>
       <groupId>com.softwaremill.sttp.client3</groupId>
       <artifactId>core_3</artifactId>
-      <version>3.9.7</version>
+      <version>3.9.8</version>
     </dependency>
     <dependency>
       <groupId>dev.zio</groupId>
