@@ -16,7 +16,7 @@
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
     <quarkus.platform.version>3.15.1</quarkus.platform.version>
     <scala-maven-plugin.version>4.9.2</scala-maven-plugin.version>
-    <scala.version>3.5.1</scala.version>
+    <scala.version>3.5.2</scala.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.5.1</surefire-plugin.version>
     <sonar.organization>carlosedp</sonar.organization>
