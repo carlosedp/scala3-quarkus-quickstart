@@ -1,7 +1,9 @@
 package org.acme.kafka
 
 import io.quarkus.kafka.client.serialization.ObjectMapperDeserializer
+import org.eclipse.microprofile.openapi.annotations.media.Schema
 
+@Schema(implementation = classOf[ArticleStatus])
 enum ArticleStatus:
     case New, Processed
 
