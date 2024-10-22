@@ -1,7 +1,6 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.acme</groupId>
   <artifactId>scala3-quarkus-quickstart</artifactId>
@@ -100,48 +99,52 @@
       <artifactId>quarkus-messaging-kafka</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-quartz</artifactId>
+    </dependency>
+    <!-- ######## Quarkus Health Check Endpoints ######## -->
+    <dependency>
       <groupId>io.smallrye.reactive</groupId>
       <artifactId>smallrye-reactive-messaging-in-memory</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- ######## Quarkus Health Check Endpoints ######## -->
+    <!-- ######## Hibernate ORM specific dependencies ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-    <!-- ######## Hibernate ORM specific dependencies ######## -->
+    <!-- JDBC driver dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-orm</artifactId>
     </dependency>
-    <!-- JDBC driver dependencies -->
+    <!-- Narayana JTA dependencies, added to be more explicit, it is otherwise included because of hibernate-orm extension -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
-    <!-- Narayana JTA dependencies, added to be more explicit, it is otherwise included because of hibernate-orm extension -->
+    <!-- Flyway DB migration specific dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-narayana-jta</artifactId>
     </dependency>
-    <!-- Flyway DB migration specific dependencies -->
+    <!-- ######## Scala 3 Magnum DB Library ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-flyway</artifactId>
     </dependency>
-    <!-- ######## Scala 3 Magnum DB Library ######## -->
+    <!-- ######## Quarkus JUnit test dependencies ######## -->
     <dependency>
       <groupId>com.augustnagro</groupId>
       <artifactId>magnum_3</artifactId>
       <version>1.3.0</version>
     </dependency>
-    <!-- ######## Quarkus JUnit test dependencies ######## -->
+    <!-- Here we use the latest version of Rest Assured to use the Scala 3 extensions -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- Here we use the latest version of Rest Assured to use the Scala 3 extensions -->
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>rest-assured</artifactId>
@@ -159,12 +162,12 @@
       <artifactId>quarkus-jacoco</artifactId>
       <scope>test</scope>
     </dependency>
+    <!-- ######## Metrics dependencies ######## -->
     <dependency>
       <groupId>org.awaitility</groupId>
       <artifactId>awaitility</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- ######## Metrics dependencies ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-metrics</artifactId>
@@ -288,7 +291,7 @@
       <plugin>
         <groupId>io.github.evis</groupId>
         <artifactId>scalafix-maven-plugin_2.13</artifactId>
-        <version>0.1.10_0.11.0</version>
+        <version>0.1.9_0.12.1</version>
       </plugin>
     </plugins>
   </build>

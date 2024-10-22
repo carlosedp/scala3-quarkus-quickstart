@@ -8,10 +8,10 @@ case class TaskViewModel(
   )
 
 object TaskViewModel:
-    def apply(task: Task): TaskViewModel =
-        TaskViewModel(
-            task.id,
-            task.title,
-            task.description,
-            task.done,
-        )
+  def apply(task: Task): TaskViewModel =
+    TaskViewModel(
+      task.id,
+      task.title,
+      task.description,
+      task.done,
+    )
