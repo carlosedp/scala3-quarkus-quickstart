@@ -7,10 +7,10 @@ import jakarta.persistence.*
 @Entity
 @Table(name = "tasks")
 class Task:
-  @Id @GeneratedValue(GenerationType.IDENTITY) var id: Long    = uninitialized
-  var title:                                           String  = uninitialized
-  var description:                                     String  = uninitialized
-  var done:                                            Boolean = uninitialized
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long    = uninitialized
+  var title:                                                      String  = uninitialized
+  var description:                                                String  = uninitialized
+  var done:                                                       Boolean = uninitialized
 
 object Task:
   def apply(command: TaskCreateCommand): Task =
