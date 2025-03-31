@@ -19,7 +19,7 @@
     <scalafix-plugin.version>0.1.9_0.12.1</scalafix-plugin.version>
     <scala.version>3.6.4</scala.version>
     <skipITs>true</skipITs>
-    <surefire-plugin.version>3.5.2</surefire-plugin.version>
+    <surefire-plugin.version>3.5.3</surefire-plugin.version>
     <sonar.organization>carlosedp</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
