@@ -155,7 +155,7 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>scala-extensions</artifactId>
-      <version>5.5.1</version>
+      <version>5.5.5</version>
       <scope>test</scope>
     </dependency>
     <dependency>
