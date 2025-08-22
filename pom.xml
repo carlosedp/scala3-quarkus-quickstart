@@ -80,6 +80,7 @@
       <artifactId>scala3-compiler_3</artifactId>
       <version>${scala.version}</version>
     </dependency>
+    <!-- ######## Scala 3 libraries for sttp client and Zio examples  ######## -->
     <dependency>
       <groupId>com.softwaremill.sttp.client3</groupId>
       <artifactId>core_3</artifactId>
@@ -90,12 +91,12 @@
       <artifactId>zio_3</artifactId>
       <version>2.1.20</version>
     </dependency>
-    <!-- ######## Quarkus Jackson and Scala Integration  ######## -->
+    <!-- ######## Quarkus lib for Jackson - Scala Integration  ######## -->
     <dependency>
       <groupId>com.fasterxml.jackson.module</groupId>
       <artifactId>jackson-module-scala_3</artifactId>
     </dependency>
-    <!-- ######## Quarkus Kafka #### -->
+    <!-- ######## Quarkus Kafka ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-messaging-kafka</artifactId>
@@ -104,44 +105,43 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-quartz</artifactId>
     </dependency>
-    <!-- ######## Quarkus Health Check Endpoints ######## -->
     <dependency>
       <groupId>io.smallrye.reactive</groupId>
       <artifactId>smallrye-reactive-messaging-in-memory</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- ######## Hibernate ORM specific dependencies ######## -->
+    <!-- ######## Quarkus Health Check Endpoints ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-health</artifactId>
     </dependency>
-    <!-- JDBC driver dependencies -->
+    <!-- ######## Hibernate ORM specific dependencies ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-orm</artifactId>
     </dependency>
-    <!-- Narayana JTA dependencies, added to be more explicit, it is otherwise included because of hibernate-orm extension -->
+    <!-- JDBC driver dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
-    <!-- Flyway DB migration specific dependencies -->
+    <!-- Narayana JTA dependencies, added to be more explicit, it is otherwise included because of hibernate-orm extension -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-narayana-jta</artifactId>
     </dependency>
-    <!-- ######## Scala 3 Magnum DB Library ######## -->
+    <!-- Flyway DB migration specific dependencies -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-flyway</artifactId>
     </dependency>
-    <!-- ######## Quarkus JUnit test dependencies ######## -->
+    <!-- ######## Scala 3 Magnum DB Library ######## -->
     <dependency>
       <groupId>com.augustnagro</groupId>
       <artifactId>magnum_3</artifactId>
       <version>1.3.1</version>
     </dependency>
-    <!-- Here we use the latest version of Rest Assured to use the Scala 3 extensions -->
+    <!-- ######## Quarkus test dependencies ######## -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
@@ -153,22 +153,24 @@
       <scope>test</scope>
     </dependency>
     <dependency>
+      <groupId>org.awaitility</groupId>
+      <artifactId>awaitility</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- Here we add the Rest Assured Scala 3 extension -->
+    <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>scala-extensions</artifactId>
       <version>5.5.6</version>
       <scope>test</scope>
     </dependency>
+    <!-- Jacoco dep to generate test coverage report -->
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jacoco</artifactId>
       <scope>test</scope>
     </dependency>
     <!-- ######## Metrics dependencies ######## -->
-    <dependency>
-      <groupId>org.awaitility</groupId>
-      <artifactId>awaitility</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-smallrye-metrics</artifactId>
