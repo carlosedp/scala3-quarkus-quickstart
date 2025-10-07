@@ -36,7 +36,7 @@ class ScalaFutureResource():
     val futureSum = Future.sequence((1 to numsAmount).map(_ => generateNum())).map(_.sum)
     // Get the IP address asynchronously
     val IPFuture = getOwnIP().map(_.body).recover:
-      case e: Exception =>
+      case _: Exception =>
         Log.error("Failed to get the IP address.")
         Left("Failed to get IP")
 

@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "scala3-quarkus-quickstart-metals": {
+      "url": "http://localhost:55387/sse",
+      "type": "sse"
+    }
+  }
+}
