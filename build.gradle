@@ -1,7 +1,7 @@
 plugins {
     id "java"
     id "scala"
-    id "io.quarkus" version "3.28.4"
+    id "io.quarkus" version "3.30.1"
     id 'cz.augi.gradle.scalafmt' version '1.21.5'
     id 'io.github.cosmicsilence.scalafix' version '0.2.5'
     id "com.github.ben-manes.versions" version "0.53.0"
