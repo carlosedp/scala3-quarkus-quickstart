@@ -20,7 +20,7 @@ def VERSIONS = [
     SCALA3        : "3.7.3",
     MAGNUM        : "1.3.1",
     STTP          : "3.11.0",
-    ZIO           : "2.1.22",
+    ZIO           : "2.1.23",
     REST_ASSURED  : "5.5.6",
 ]
 
