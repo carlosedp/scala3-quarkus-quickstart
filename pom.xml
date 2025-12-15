@@ -161,7 +161,7 @@
     <dependency>
       <groupId>io.rest-assured</groupId>
       <artifactId>scala-extensions</artifactId>
-      <version>5.5.6</version>
+      <version>6.0.0</version>
       <scope>test</scope>
     </dependency>
     <!-- Jacoco dep to generate test coverage report -->
